@@ -1,0 +1,12 @@
+extends base.pug
+
+block content 
+    
+    div 
+        h4 #{video.description}
+        small #{video.createdAt}
+    hr
+    //- h4 #{video.views} #{video.views === 1 ? "view" : "views"}
+    a(href=`${video.id}/edit`) edit
+    br
+    a(href=`${video.id}/delete`) delete Video

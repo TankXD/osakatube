@@ -1,0 +1,30 @@
+{
+  "name": "tank-tube-prototype",
+  "version": "1.0.0",
+  "description": "to watch videos.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TankXD/tanktube-prototype.git"
+  },
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/init.js"
+  },
+  "author": "parksungchan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TankXD/tanktube-prototype/issues"
+  },
+  "homepage": "https://github.com/TankXD/tanktube-prototype#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.6.0",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/node": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "nodemon": "^2.0.19"
+  }
+}

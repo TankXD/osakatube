@@ -1,0 +1,11 @@
+extends base.pug
+
+block content 
+    if errorMessage
+        h4 errorMessage
+
+    form(action="" method="post")
+        input(name="title",type="text", placeholder="Title",required)
+        input(name="description",type="text", placeholder="Description",required)
+        input(name="hashtags",type="text", placeholder="Hashtags",required)
+        input(type="submit" value="Upload") 

@@ -1,0 +1,11 @@
+extends base.pug
+include mixins/video.pug
+
+block content 
+    
+ 
+    ul 
+        each vd in videos
+            +video(vd)
+        else 
+            li 아무것도 찾지 못했어.
