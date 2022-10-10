@@ -1,22 +1,35 @@
 doctype html 
 html(lang="ko")
     head 
-        title #{pageTitle} | Tanktube
+        title #{pageTitle} | #{siteName}
         link(rel="stylesheet" href="https://unpkg.com/mvp.css")
     body
         header 
-            h1=pageTitle
+            h1=siteName
 
+            //- res.locals 같은 경우 전역변수이기에 pug와 express가 공유하고있고
+            //- 다른 명령어 없이 res.locals에 있는 데이터들은 간단하게 쓸 수 있다.
+            //- 자바스크립트파일에서 res.locals안에 res.locals.sexy라는 오브젝트를 생성했다면
+            //-  pug파일에서 #{sexy}를 입력해서 바로 사용할 수 있다.
+            
             nav 
                 ul 
                     li
                         a(href="/") home
-                    li 
-                        a(href="/search") search
+                    if loggedIn
+                        li
+                            a(href="/logout") Logout
+                        li 
+                            a(href="/my-profile") #{loggedInUser.name}のProfile
+                    else    
+                        li  
+                            a(href="/join") Join
+                        li  
+                            a(href="/login") Login
                     li  
                         a(href="/videos/upload") Upload video
-                    li
-                        a(href="/join") Join
+                    li 
+                        a(href="/search") search
         main 
             block content
         include partials/footer.pug
