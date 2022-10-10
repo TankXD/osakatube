@@ -5,6 +5,8 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
   email: { type: String, require: true, unique: true },
   username: { type: String, require: true, unique: true },
+  // unique:true속성을 걸어주면, 이미 존재하는 email or username을 db에 넣으려고할 때
+  // 에러가 뜨고 생성이 안되게 해줌
   password: { type: String, require: true },
   name: { type: String, require: true },
   location: String,
@@ -17,6 +19,8 @@ userSchema.pre("save", async function () {
   // 여러번 해싱해주는 것.
 });
 
-const user = mongoose.model("user", userSchema);
-
-export default user;
+const User = mongoose.model("User", userSchema);
+// usermodel은 User이런식으로 대문자를 쓰는 것이 좋다.
+// 왜냐면 실제로 controller에서 Usermodel을 쓸때 따로 user라는 변수를 만들면
+// 이름이 겹쳐서 오류가 날 수 있기 때문
+export default User;

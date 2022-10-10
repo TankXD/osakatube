@@ -23,6 +23,11 @@ videoSchema.static("formatHashtags", function (hashtags) {
 // 미들웨어나 static함수 생성 등 해당 작업들은
 // model을 생성하는 코드보다 이전에 작성해야한다.
 
-const video = mongoose.model("video", videoSchema);
+const Video = mongoose.model("Video", videoSchema);
 
-export default video;
+// videomodel은 Video이런식으로 대문자를 쓰는 것이 좋다.
+// 왜냐면 모델명을 video로 만들어 버렸다면
+// 실제 실제로 controller에서 videomodel(video)을 쓸때
+// controller에서 따로 video라는 변수를 만들면
+// 이름이 겹쳐서 오류가 날 수 있기 때문
+export default Video;
