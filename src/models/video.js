@@ -20,8 +20,9 @@ videoSchema.static("formatHashtags", function (hashtags) {
     .map((word) => (word.startsWith("#") ? word : `#${word}`));
 });
 
-// 미들웨어는 model을 생성하는 코드보다 이전에 작성해야한다.
+// 미들웨어나 static함수 생성 등 해당 작업들은
+// model을 생성하는 코드보다 이전에 작성해야한다.
 
-const videoModel = mongoose.model("video", videoSchema);
+const video = mongoose.model("video", videoSchema);
 
-export default videoModel;
+export default video;

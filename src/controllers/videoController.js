@@ -1,14 +1,14 @@
-import videoModel from "../models/video";
+import video from "../models/video";
 
 export const home = async (req, res) => {
-  const videos = await videoModel.find({}).sort({ createdAt: "desc" });
+  const videos = await video.find({}).sort({ createdAt: "desc" });
   return res.render("home", { pageTitle: "Home", videos });
 };
 
 export const watchVideos = async (req, res) => {
   const { id } = req.params;
   //const id = req.params.id와 같은방법. 하지만 ES6문법으로 쓰면 위에 방식이 된다.
-  const video = await videoModel.findById(id);
+  const video = await video.findById(id);
   if (!video) {
     // (video === null)로 입력하는 것과 같다.
     return res.render("404", { pageTitle: "Video not found" });
@@ -19,7 +19,7 @@ export const watchVideos = async (req, res) => {
 export const getEdit = async (req, res) => {
   const { id } = req.params;
   //const id = req.params.id와 같은방법. 하지만 ES6문법으로 쓰면 위에 방식이 된다.
-  const video = await videoModel.findById(id);
+  const video = await video.findById(id);
   if (!video) {
     return res.render("404", { pageTitle: "Video not found" });
   }
@@ -30,7 +30,7 @@ export const getEdit = async (req, res) => {
 export const postEdit = async (req, res) => {
   const { id } = req.params;
   const { title, description, hashtags } = req.body;
-  const video = await videoModel.exists({ _id: id });
+  const video = await video.exists({ _id: id });
   // exists : 해당 filter(조건문)에 부합하는 video데이터가 있다면 true로
   // 반환해준다. 즉 존재하는지 여부를 반환해주는 것 ※조건은 여러개도 가능하며, id가 아니여도 됨.
   // findById : id값이 맞는 video데이터의 오브젝트를 전부다 반환해줌.
@@ -38,10 +38,10 @@ export const postEdit = async (req, res) => {
   if (!video) {
     return res.render("404", { pageTitle: "Video not found" });
   }
-  await videoModel.findByIdAndUpdate(id, {
+  await video.findByIdAndUpdate(id, {
     title,
     description,
-    hashtags: videoModel.formatHashtags(hashtags),
+    hashtags: video.formatHashtags(hashtags),
   });
   // 해당 함수를 쓰면,video.title = title 이런식으로 하나하나 안써줘도 되고 편하고
   // 추가로 await video.save();사용 없이 업데이트도 한번에 가능하다.
@@ -60,10 +60,10 @@ export const postUpload = async (req, res) => {
   const { title, description, hashtags } = req.body;
 
   try {
-    await videoModel.create({
+    await video.create({
       title: title,
       description: description,
-      hashtags: videoModel.formatHashtags(hashtags),
+      hashtags: video.formatHashtags(hashtags),
     });
 
     return res.redirect("/");
@@ -78,17 +78,19 @@ export const postUpload = async (req, res) => {
 
 export const deleteVideos = async (req, res) => {
   const { id } = req.params;
-  await videoModel.findByIdAndDelete(id);
+  await video.findByIdAndDelete(id);
   return res.redirect(`/`);
 };
 
 export const searchVideos = async (req, res) => {
   const { keyword } = req.query;
   // req.query는 url에 있는 query부분 값을 추출해줌.
+  // 즉 get메소드로 보내는 내용은 url에 표시되며 전달되는데 그 값을 받는 것
   let videos = [];
   if (keyword) {
-    videos = await videoModel.find({
+    videos = await video.find({
       title: {
+        // $로시작하는 기능들은 mongodb 기능이다 (mongoose에서찾으면안됨)
         $regex: new RegExp(keyword, "i"),
         // regular expression(정규식)을 이용해서 검색하는 방식.
         // i는 대소문자 구분안한다는 뜻,

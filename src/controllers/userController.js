@@ -1,5 +1,20 @@
-export const join = (req, res) => {
-  res.send("join");
+import user from "../models/user";
+
+export const getJoin = (req, res) => {
+  return res.render("join", { pageTitle: "Join" });
+};
+
+export const postJoin = async (req, res) => {
+  const { name, email, username, password, location } = req.body;
+  await user.create({
+    name,
+    email,
+    username,
+    password,
+    location,
+  });
+
+  return res.redirect("/login");
 };
 
 export const editUser = (req, res) => {
