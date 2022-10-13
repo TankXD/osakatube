@@ -4,10 +4,12 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   email: { type: String, require: true, unique: true },
+  avatarUrl: String,
   username: { type: String, require: true, unique: true },
   // unique:true속성을 걸어주면, 이미 존재하는 email or username을 db에 넣으려고할 때
   // 에러가 뜨고 생성이 안되게 해줌
-  password: { type: String, require: true },
+  socialOnly: { type: Boolean, default: false },
+  password: { type: String },
   name: { type: String, require: true },
   location: String,
 });
