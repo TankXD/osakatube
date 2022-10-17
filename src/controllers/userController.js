@@ -71,12 +71,10 @@ export const postLogin = async (req, res) => {
     });
   }
   if (user.socialOnly === true) {
-    return res
-      .status(400)
-      .render("login", {
-        pageTitle: "Login",
-        errorMessage: "This ID is for social login only",
-      });
+    return res.status(400).render("login", {
+      pageTitle: "Login",
+      errorMessage: "This ID is for social login only",
+    });
   }
   const ok = await bcrypt.compare(password, user.password);
   if (!ok) {
@@ -132,7 +130,7 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    console.log(userData);
+    // console.log(userData);
     const emailData = await (
       await fetch("https://api.github.com/user/emails", {
         headers: {
@@ -171,8 +169,85 @@ export const logout = (req, res) => {
   return res.redirect("/");
 };
 
-export const editUser = (req, res) => {
-  res.send("edit user");
+export const getEditUser = (req, res) => {
+  res.render("edit-profile");
+};
+
+export const postEditUser = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { name, username, email, location },
+  } = req;
+
+  const findEnteredUsername = await User.findOne({ username });
+  if (findEnteredUsername) {
+    const usernameExists = findEnteredUsername._id != _id;
+    if (usernameExists) {
+      return res.status(400).render("edit-profile", {
+        errorMessage: "username is already Exists",
+      });
+    }
+  }
+  const findEnteredEmail = await User.findOne({ email });
+  if (findEnteredEmail) {
+    const emailExists = findEnteredEmail._id != _id;
+    if (emailExists) {
+      return res.status(400).render("edit-profile", {
+        errorMessage: "email is already Exists",
+      });
+    }
+  }
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      name,
+      username,
+      email,
+      location,
+    },
+    { new: true }
+    // new:true설정을 안해두면 모델.findByIdAndUpdate메소드는 업데이트 되기 전의 정보를 반환해줌.
+    // new:true를 설정해두면 업데이트된 후의 데이터를 반환해준다.
+  );
+  req.session.user = updatedUser;
+
+  return res.redirect("/users/edit");
+};
+
+export const getChangePassword = (req, res) => {
+  if (req.session.user.socialOnly === true) {
+    return res.redirect("/");
+  }
+  return res.render("change-password", { pageTitle: "Change Password" });
+};
+export const postChangePassword = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { oldPassword, newPassword, newPasswordConfirmation },
+  } = req;
+  const user = await User.findById(_id);
+  const ok = await bcrypt.compare(oldPassword, user.password);
+  if (!ok) {
+    return res.status(400).render("change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "The current password is incoreect",
+    });
+  }
+  if (newPassword !== newPasswordConfirmation) {
+    return res.status(400).render("change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "The password does not match the confirmation",
+    });
+  }
+  user.password = newPassword;
+  await user.save();
+
+  req.session.destroy();
+  return res.redirect("/login");
 };
 
 export const seeUser = (req, res) => {

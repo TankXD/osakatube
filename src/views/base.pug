@@ -17,17 +17,19 @@ html(lang="ko")
                     li
                         a(href="/") home
                     if loggedIn
+                        li 
+                            a(href="/users/edit") Edit
                         li
                             a(href="/users/logout") Logout
                         li 
                             a(href="/my-profile") #{loggedInUser.name}のProfile
+                        li  
+                            a(href="/videos/upload") Upload video
                     else    
                         li  
                             a(href="/join") Join
                         li  
-                            a(href="/login") Login
-                    li  
-                        a(href="/videos/upload") Upload video
+                            a(href="/login") Login                        
                     li 
                         a(href="/search") search
         main 
