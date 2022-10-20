@@ -5,11 +5,10 @@ mixin video(video)
         
 
         p #{video.description}
-        small #{video.createdAt}      
-        br 
         ul 
             each hashtags in video.hashtags
                 li=hashtags 
+        small #{video.createdAt}      
         hr     
 
         //- #{video.rating} / 5

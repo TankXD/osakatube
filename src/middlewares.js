@@ -31,5 +31,15 @@ export const publicOnlyMiddleware = (req, res, next) => {
   }
 };
 
-export const uploadAvatar = multer({ dest: "uploads/" });
+export const uploadAvatar = multer({
+  dest: "uploads/avatars/",
+  limits: { fileSize: 300000 },
+});
+export const uploadVideo = multer({
+  dest: "uploads/videos/",
+  limits: { fileSize: 30000000 },
+});
+
 // dest속성 :  multer를 통해 브라우저에서 file을 받을 때 백엔드의 어떤 경로에 받을 지 정하는 속성
+// limits : 각종 제한을 걸 수 있는 속성
+// fileSize : 업로드가능한 파일 크기를 제한, 1 = 1byte임

@@ -59,8 +59,11 @@ export const postUpload = async (req, res) => {
   // ES6로쓰면 아래와 같다.
   const { title, description, hashtags } = req.body;
 
+  const file = req.file;
+
   try {
     await Video.create({
+      fileUrl: file.path,
       title: title,
       description: description,
       hashtags: Video.formatHashtags(hashtags),

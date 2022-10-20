@@ -7,7 +7,7 @@ import {
   postUpload,
   deleteVideos,
 } from "../controllers/videoController";
-import { loggedInUserOnlyMiddleware } from "../middlewares";
+import { loggedInUserOnlyMiddleware, uploadVideo } from "../middlewares";
 const videoRouter = express.Router();
 
 // id에 정규식을 걸어주지 않은 경우 /upload 라우터가 맨 위에 와야함.
@@ -30,6 +30,6 @@ videoRouter
   .route("/upload")
   .all(loggedInUserOnlyMiddleware)
   .get(getUpload)
-  .post(postUpload);
+  .post(uploadVideo.single("video"), postUpload);
 
 export default videoRouter;

@@ -1,12 +1,12 @@
 extends base.pug
 
 block content 
-    
+    video(src="/"+video.fileUrl,controls) 
     div 
         h4 #{video.description}
         small #{video.createdAt}
     hr
     //- h4 #{video.views} #{video.views === 1 ? "view" : "views"}
-    a(href=`${video.id}/edit`) edit
+    a(href=`${video.id}/edit`) edit Video &rarr;
     br
-    a(href=`${video.id}/delete`) delete Video
+    a(href=`${video.id}/delete`) delete Video &rarr;
