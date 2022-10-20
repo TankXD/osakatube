@@ -22,7 +22,7 @@ html(lang="ko")
                         li
                             a(href="/users/logout") Logout
                         li 
-                            a(href="/my-profile") #{loggedInUser.name}のProfile
+                            a(href=`/users/${loggedInUser._id}`) #{loggedInUser.name}のProfile
                         li  
                             a(href="/videos/upload") Upload video
                     else    
