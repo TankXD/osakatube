@@ -13,6 +13,10 @@ const videoSchema = new mongoose.Schema({
     views: { type: Number, default: 0, required: true },
     rating: { type: Number, default: 0, required: true },
   },
+  // ObjectId를 type으로 쓰는 것은 js의 기능이 아닌, mongoose의 기능
+  // ref 속성이 매우 중요한데, 이ObjectId의 출처를 써야하고, 그 출처가 되는 스키마모델과의 연결을 해준다
+  // ObjectId부분은 String이 아니기때문에 String type의 데이터와 비교하는 경우 String으로 변환해줘야함.
+  owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
 });
 
 videoSchema.static("formatHashtags", function (hashtags) {

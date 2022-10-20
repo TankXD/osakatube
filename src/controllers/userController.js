@@ -3,6 +3,7 @@ import User from "../models/user";
 import fetch from "node-fetch";
 import bcrypt from "bcrypt";
 import { token } from "morgan";
+import Video from "../models/video";
 // 같은 js라고해도 백엔드에서 fetch는 원래 못쓰기때문에 node-fetch를 패키지를 받아야함.
 // 주의점은 그냥 npm i node-fetch로 하면 버전3이상이 다운로드 되는데, 3점대는 오류가 발생한다.
 // npm install node-fetch@2.6.1 를입력해서 버전2를 받는 것이 좋다.
@@ -170,7 +171,7 @@ export const logout = (req, res) => {
 };
 
 export const getEditUser = (req, res) => {
-  res.render("edit-profile");
+  res.render("edit-profile", { pageTitle: "Edit User" });
 };
 
 export const postEditUser = async (req, res) => {
@@ -253,10 +254,13 @@ export const postChangePassword = async (req, res) => {
 
 export const seeUser = async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id);
+  const user = await User.findById(id).populate("videos");
   if (!user) {
     return res.status(404).render("404", { pageTitle: "User not found." });
   }
 
-  return res.render("users/profile", { pageTitle: user.name, user });
+  return res.render("users/profile", {
+    pageTitle: `${user.name}のProfile`,
+    user,
+  });
 };

@@ -1,3 +1,4 @@
+import User from "../models/user";
 import Video from "../models/video";
 
 export const home = async (req, res) => {
@@ -8,7 +9,8 @@ export const home = async (req, res) => {
 export const watchVideos = async (req, res) => {
   const { id } = req.params;
   //const id = req.params.id와 같은방법. 하지만 ES6문법으로 쓰면 위에 방식이 된다.
-  const video = await Video.findById(id);
+  const video = await Video.findById(id).populate("owner");
+  console.log(video);
   if (!video) {
     // (video === null)로 입력하는 것과 같다.
     return res.status(404).render("404", { pageTitle: "Video not found" });
@@ -22,6 +24,9 @@ export const getEdit = async (req, res) => {
   const video = await Video.findById(id);
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found" });
+  }
+  if (String(video.owner) !== String(req.session.user._id)) {
+    return res.status(403).redirect("/");
   }
 
   return res.render("edit", { pageTitle: `Edit : ${video.title}`, video });
@@ -38,6 +43,10 @@ export const postEdit = async (req, res) => {
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }
+  if (String(video.owner) !== String(req.session.user._id)) {
+    return res.status(403).redirect("/");
+  }
+
   await Video.findByIdAndUpdate(id, {
     title,
     description,
@@ -58,16 +67,22 @@ export const postUpload = async (req, res) => {
   // const hashtags = req.body.hashtags;
   // ES6로쓰면 아래와 같다.
   const { title, description, hashtags } = req.body;
-
+  const { _id } = req.session.user;
   const file = req.file;
 
   try {
-    await Video.create({
+    const newVideo = await Video.create({
       fileUrl: file.path,
       title: title,
+      owner: _id,
       description: description,
       hashtags: Video.formatHashtags(hashtags),
     });
+    const user = await User.findById(_id);
+    // user스키마의 videos데이터는 배열이고, 배열에 추가하는 경우
+    // user.videos = newVideo._id가 아니라 push함수를 사용해줘야 한다.
+    user.videos.push(newVideo._id);
+    user.save();
 
     return res.redirect("/");
   } catch (error) {
@@ -81,6 +96,13 @@ export const postUpload = async (req, res) => {
 
 export const deleteVideos = async (req, res) => {
   const { id } = req.params;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.status(404).render("404", { pageTitle: "Video not found." });
+  }
+  if (String(video.owner) !== String(req.session.user._id)) {
+    return res.status(403).redirect("/");
+  }
   await Video.findByIdAndDelete(id);
   return res.redirect(`/`);
 };

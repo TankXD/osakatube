@@ -12,10 +12,14 @@ const userSchema = new mongoose.Schema({
   password: { type: String },
   name: { type: String, require: true },
   location: String,
+  // 한명의 user는 복수의 video를 받기 때문에 array(배열)로 만들어줘야한다.
+  videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }],
 });
 
 userSchema.pre("save", async function () {
-  this.password = await bcrypt.hash(this.password, 5);
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 5);
+  }
   // bcrypt.hash(해싱할비번,솔트횟수)
   // 여기서 솔트 횟수는, 한번만 해싱하면 레인보우테이블에 해킹위험이 있어서
   // 여러번 해싱해주는 것.

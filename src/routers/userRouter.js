@@ -33,6 +33,8 @@ userRouter
   .post(postChangePassword);
 userRouter.get("/github/start", publicOnlyMiddleware, startGithubLogin);
 userRouter.get("/github/finish", publicOnlyMiddleware, finishGithubLogin);
+// /:id로 쓴 Router를 다른 Router들보다 위에 두게되면 모든 경로를 :id로 인식하기때문에 seeUser컨트롤러가 실행될 것,
+// 해결되기 위해서는 :id에 경로를 인식하는 조건식을 걸거나, :id라우터를 맨 아래에 둔다.
 userRouter.get("/:id", seeUser);
 
 export default userRouter;

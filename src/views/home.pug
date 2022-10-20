@@ -4,7 +4,7 @@ include mixins/video.pug
 block content 
     
  
-    ul 
+
         each video in videos
             +video(video)
             //-  in에는  받은 변수명 그대로
@@ -12,4 +12,4 @@ block content
             //- 즉 each뒤에 쓴 video는 컨트롤러에서받은 복수의 videos배열들을 1개씩 개별적으로 쓰는 것
             //- +믹싱파일에있는믹싱함수명(템플릿내에서의변수명)
         else 
-            li 아무것도 찾지 못했어.
+            li Sorry nothing found.
