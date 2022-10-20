@@ -5,7 +5,10 @@ block content
     
  
     ul 
-        each vd in videos
-            +video(vd)
+        each video in videos
+            +video(video)
+            //-  in에는  받은 변수명 그대로
+            //- each에는 받은 변수를 해당 pug템플릿 안에서 쓸 변수 명
+            //- +믹싱파일에있는믹싱함수명(템플릿내에서의변수명)
         else 
             li 아무것도 찾지 못했어.

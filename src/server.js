@@ -36,7 +36,7 @@ app.use(
     // DB에 session을 저장하게 된다.
     // 기본적으로 공식사이트에서도 resave와 saveUninitialized는 false가 권장된다.
     cookie: {
-      maxAge: 600000,
+      maxAge: 6000000,
       // 쿠키의 유지기간을 정하는 속성 (1000이 1초)
       // 10분으로 설정된 상태임.
     },
@@ -53,6 +53,8 @@ app.use(
 // 참고로 세션과 쿠키는 별개이다.
 
 app.use(localMiddleware);
+// uploads 경로로 브라우저가 get요청을하면 uploads폴더 안을 공개하겠다는 의미.
+app.use("/uploads", express.static("uploads"));
 app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);

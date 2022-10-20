@@ -30,7 +30,7 @@ export const getEdit = async (req, res) => {
 export const postEdit = async (req, res) => {
   const { id } = req.params;
   const { title, description, hashtags } = req.body;
-  const video = await Video.exists({ _id: id });
+  const video = await Video.findById(id);
   // exists : 해당 filter(조건문)에 부합하는 video데이터가 있다면 true로
   // 반환해준다. 즉 존재하는지 여부를 반환해주는 것 ※조건은 여러개도 가능하며, id가 아니여도 됨.
   // findById : id값이 맞는 video데이터의 오브젝트를 전부다 반환해줌.
