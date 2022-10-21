@@ -53,8 +53,13 @@ app.use(
 // 참고로 세션과 쿠키는 별개이다.
 
 app.use(localMiddleware);
-// uploads 경로로 브라우저가 get요청을하면 uploads폴더 안을 공개하겠다는 의미.
+
+// 브라우저(클라이언트)에게 uploads폴더 안을 공개하겠다는 의미.
+// "/uplaods"이부분에는 폴더명과 달라도 됨.,그냥 브라우저를 위한 URL일 뿐.
+// 즉, uploads폴더의 내용물을 /uploads URL을 통해 공개하라는 것.
+// 중요한건 express.static("폴더명")을 입력해야함.
 app.use("/uploads", express.static("uploads"));
+app.use("/frontend", express.static("assets"));
 app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
