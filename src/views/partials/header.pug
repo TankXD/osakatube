@@ -1,0 +1,28 @@
+header 
+    //- h1=pageTitle
+    a(href="/").header__logo
+        i.fab.fa-youtube 
+    //- res.locals 같은 경우 전역변수이기에 pug와 express가 공유하고있고
+    //- 다른 명령어 없이 res.locals에 있는 데이터들은 간단하게 쓸 수 있다.
+    //- 자바스크립트파일에서 res.locals안에 res.locals.sexy라는 오브젝트를 생성했다면
+    //-  pug파일에서 #{sexy}를 입력해서 바로 사용할 수 있다.
+    
+    nav 
+        ul 
+            li 
+                a(href="/search") 
+                    i.fas.fa-search
+            if loggedIn
+                li  
+                    a(href="/videos/upload") Upload video
+                li 
+                    a(href="/users/edit") Edit Profile
+                li 
+                    a(href=`/users/${loggedInUser._id}`) #{loggedInUser.name}のProfile
+                li
+                    a(href="/users/logout") Logout
+            else    
+                li  
+                    a(href="/login") Login                        
+                li  
+                    a(href="/join").header__btn Join

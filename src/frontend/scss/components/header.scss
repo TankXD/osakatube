@@ -1,0 +1,32 @@
+header {
+  padding: 15px 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba($color: white, $alpha: 0.1);
+
+  .header__logo {
+    color: $red;
+    font-size: 36px;
+  }
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    li {
+      margin-left: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    i {
+      font-size: 16px;
+    }
+  }
+  .header__btn {
+    background-color: white;
+    color: $bg;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+}

@@ -2,8 +2,9 @@ extends base
 
 block content 
     //- multer패키지를 사용해서 백엔드로 파일을 보내려면 form의 encording type을 multipart/form-data를 써줘야 한다.
-    form(method="post",enctype="multipart/form-data") 
-        img(src="/" + loggedInUser.avatarUrl, width="100",height="100")
+    
+    img(src="/" + loggedInUser.avatarUrl, width="100",height="100").avatar.edit-profile__avatar
+    form(method="post",enctype="multipart/form-data").edit-profile__form
         if errorMessage    
             span #{errorMessage}
         label(for="avatar") avatar
@@ -16,5 +17,5 @@ block content
         input(placeholder="location",name="location", type="text", required,value=loggedInUser.location)
         input(type="submit",value="Update Profile")
         if !loggedInUser.socialOnly
-            hr
-            a(href="/users/change-password") change password &rarr;
+            div.edit-profile__password
+                a(href="/users/change-password") change password &rarr;

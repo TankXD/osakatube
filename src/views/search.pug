@@ -2,10 +2,13 @@ extends base.pug
 include mixins/video.pug
 
 block content 
-
-    form(action="",method="get")
+    form(action="",method="get").search__form
         input(name="keyword",type="text", placeholder="Search by title")
-        input(type="submit", value="search") 
+        button 
+            i.fas.fa-search
 
-    each vd in videos
-        +video(vd)
+    div.video-grid
+        each vd in videos
+            +video(vd)
+        else 
+            span.empty__message Sorry nothing found.

@@ -2,11 +2,14 @@ extends ../base
 include ../mixins/video.pug
 
 block content
-    
-        each video in user.videos
-            +video(video)
-        else 
-            li Sorry nothing found.
+        div.profile__data 
+            img(src="/"+ user.avatarUrl).avatar
+            h3=user.name 
+        div.video-grid
+            each video in user.videos
+                +video(video)
+            else 
+                span.empty__message Sorry nothing found.
             //-  in에는  받은 변수명 그대로
             //- each에는 받은 변수를 해당 pug템플릿 안에서 쓸 변수 명
             //- 즉 each뒤에 쓴 video는 컨트롤러에서받은 복수의 videos배열들을 1개씩 개별적으로 쓰는 것

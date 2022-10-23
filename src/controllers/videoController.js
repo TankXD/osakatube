@@ -2,7 +2,9 @@ import User from "../models/user";
 import Video from "../models/video";
 
 export const home = async (req, res) => {
-  const videos = await Video.find({}).sort({ createdAt: "desc" });
+  const videos = await Video.find({})
+    .sort({ createdAt: "desc" })
+    .populate("owner");
   return res.render("home", { pageTitle: "Home", videos });
 };
 
@@ -124,7 +126,7 @@ export const searchVideos = async (req, res) => {
         // i는 대소문자 구분안한다는 뜻,
         // 정규식을 쓰는순간 그냥 포함되는 것들이 검색된다.
       },
-    });
+    }).populate("owner");
   }
 
   return res.render("search", { pageTitle: "Search", videos });

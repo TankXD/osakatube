@@ -2,14 +2,12 @@ extends base.pug
 include mixins/video.pug
 
 block content 
-    
- 
-
+    div.video-grid
         each video in videos
-            +video(video)
+            +video(video)            
             //-  in에는  받은 변수명 그대로
             //- each에는 받은 변수를 해당 pug템플릿 안에서 쓸 변수 명
-            //- 즉 each뒤에 쓴 video는 컨트롤러에서받은 복수의 videos배열들을 1개씩 개별적으로 쓰는 것
+            //- 즉 each뒤에 쓴 video는 컨트롤러에서받은 복수의 video가 담긴 videos배열을 1개씩 개별적으로 쓰는 것
             //- +믹싱파일에있는믹싱함수명(템플릿내에서의변수명)
         else 
-            li Sorry nothing found.
+            span.empty__message Sorry nothing found.

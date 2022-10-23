@@ -17,6 +17,9 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre("save", async function () {
+  // save()함수를 쓴다고해서 무조건 password를 해싱하는 것이 아니라,
+  // save할때 password가 수정된 경우에만 해싱하도록 하는 것.
+  // this.ioModified("어떤것이 수정되었을때 참을 돌려줄지 적어야함")
   if (this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, 5);
   }

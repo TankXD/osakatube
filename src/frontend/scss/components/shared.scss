@@ -1,0 +1,26 @@
+.empty__message {
+  margin-bottom: 50px;
+  font-size: 18px;
+}
+.video-grid {
+  display: grid;
+  gap: 50px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  //   grid-template-columns: repeat(4, 1fr);
+  //==위와같음 grid-template-columns: 1fr 1fr 1fr 1fr;
+  //각열의 넓이는100px이고 4개를 만듬 ->  grid-template-columns: 100px 100px 100px 100px;
+  //   low로 2개, columns 3개로하면 2행 3열이 됨.
+}
+.auth-switch {
+  text-align: center;
+  margin-top: 40px;
+  a {
+    text-decoration: underline;
+  }
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
