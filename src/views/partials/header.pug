@@ -17,10 +17,14 @@ header
                     a(href="/videos/upload") Upload video
                 li 
                     a(href="/users/edit") Edit Profile
-                li 
-                    a(href=`/users/${loggedInUser._id}`) #{loggedInUser.name}のProfile
                 li
                     a(href="/users/logout") Logout
+                li.header__profile
+                    a(href=`/users/${loggedInUser._id}`)
+                        if loggedInUser.avatarUrl === ""
+                            span.header__avatar--empty no image
+                        else
+                            img(src="/" + loggedInUser.avatarUrl).header__avatar
             else    
                 li  
                     a(href="/login") Login                        

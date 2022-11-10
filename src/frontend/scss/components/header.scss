@@ -4,7 +4,6 @@ header {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgba($color: white, $alpha: 0.1);
-
   .header__logo {
     color: $red;
     font-size: 36px;
@@ -17,7 +16,9 @@ header {
       margin-left: 30px;
       font-size: 14px;
       font-weight: 600;
-      text-transform: uppercase;
+      &:not(.header__profile) {
+        text-transform: uppercase;
+      }
     }
     i {
       font-size: 16px;
@@ -28,5 +29,22 @@ header {
     color: $bg;
     padding: 5px 10px;
     border-radius: 5px;
+  }
+  .header__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  .header__avatar--empty {
+    display: flex;
+    color: black;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 10px;
   }
 }

@@ -1,4 +1,5 @@
 mixin video(video)
+
     a(href=`/videos/${video.id}`).video-mixin
         div.video-mixin__thumb  
         div.video-mixin__data   
@@ -6,13 +7,14 @@ mixin video(video)
             div.video-mixin__meta
                 span #{video.owner.username} ◽ 
                 span #{video.meta.views} views   
-        //- p #{video.description}
-        //- ul 
-        //-     each hashtags in video.hashtags
-        //-         li=hashtags 
-        //- small #{video.createdAt}      
-        //- hr     
+    //
+        p #{video.description}
+        ul 
+            each hashtags in video.hashtags
+                li=hashtags 
+        small #{video.createdAt}      
+        hr     
 
-        //- #{video.rating} / 5
-        //- #{video.comments} comments
+        #{video.rating} / 5
+        #{video.comments} comments
             

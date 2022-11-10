@@ -8,14 +8,17 @@ const path = require("path");
 
 module.exports = {
   // entry속성 : 최신코드로 작성한 webpack으로 처리할 js파일의 경로를 입력.
-  entry: "./src/frontend/js/main.js",
+  entry: {
+    main: "./src/frontend/js/main.js",
+    videoPlayer: "./src/frontend/js/videoPlayer.js",
+  },
   watch: true,
   plugins: [new MiniCssExtractPlugin({ filename: "css/styles.css" })],
   //   mode속성 : 현재 코드가 development(개발중)인지, production(완성)된건지 알려줘야함. (완성본이라면 webpack으로 변형할 때 압축해서 변형해줌.)
   mode: "development",
   // output속성 : 파일을 webpack에서 처리한 후에 어떤 경로에 어떤파일명으로 저장할지 설정해주는 속성
   output: {
-    filename: "js/main.js",
+    filename: "js/[name].js",
     path: path.resolve(__dirname, "assets"),
     clean: true,
     // path에는 절대경로를 써야함. 즉, src폴더라면 내 컴퓨터내에 src폴더의 경로가 어딘지까지 처음부터 끝까지 써야함.

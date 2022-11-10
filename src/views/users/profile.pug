@@ -3,7 +3,10 @@ include ../mixins/video.pug
 
 block content
         div.profile__data 
-            img(src="/"+ user.avatarUrl).avatar
+            if loggedInUser.avatarUrl === ""
+                span.avatar--empty NO IMAGE
+            else
+                img(src="/"+ user.avatarUrl).avatar
             h3=user.name 
         div.video-grid
             each video in user.videos

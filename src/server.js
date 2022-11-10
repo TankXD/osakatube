@@ -59,7 +59,7 @@ app.use(localMiddleware);
 // 즉, uploads폴더의 내용물을 /uploads URL을 통해 공개하라는 것.
 // 중요한건 express.static("폴더명")을 입력해야함.
 app.use("/uploads", express.static("uploads"));
-app.use("/frontend", express.static("assets"));
+app.use("/static", express.static("assets"));
 app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
