@@ -7,6 +7,7 @@ import express, { response } from "express";
 import morgan from "morgan";
 import session from "express-session";
 // session을 쓰기위해서 express-session을 써야함!
+import flash from "express-flash";
 import MongoStore from "connect-mongo";
 // session을 db에 넣는 작업 하기위해 사용(서버를 재시작해도 세션유지)
 // express-session을 임포트한 후에 임포트하기.
@@ -54,6 +55,7 @@ app.use(
 // 참고로 세션과 쿠키는 별개이다.
 
 app.use(localMiddleware);
+app.use(flash());
 
 // 브라우저(클라이언트)에게 uploads폴더 안을 공개하겠다는 의미.
 // "/uplaods"이부분에는 폴더명과 달라도 됨.,그냥 브라우저를 위한 URL일 뿐.

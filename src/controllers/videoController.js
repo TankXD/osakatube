@@ -28,6 +28,7 @@ export const getEdit = async (req, res) => {
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }
   if (String(video.owner) !== String(req.session.user._id)) {
+    req.flash("error", "Not authorized");
     return res.status(403).redirect("/");
   }
 
@@ -46,6 +47,7 @@ export const postEdit = async (req, res) => {
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }
   if (String(video.owner) !== String(req.session.user._id)) {
+    req.flash("error", "You are not the owner of the video");
     return res.status(403).redirect("/");
   }
 
@@ -56,6 +58,7 @@ export const postEdit = async (req, res) => {
   });
   // 해당 함수를 쓰면,video.title = title 이런식으로 하나하나 안써줘도 되고 편하고
   // 추가로 await video.save();사용 없이 업데이트도 한번에 가능하다.
+  req.flash("success", "Change saved");
   return res.redirect(`/videos/${id}`);
 };
 
@@ -85,7 +88,7 @@ export const postUpload = async (req, res) => {
     // user.videos = newVideo._id가 아니라 push함수를 사용해줘야 한다.
     user.videos.push(newVideo._id);
     user.save();
-
+    req.flash("success", "Upload complete");
     return res.redirect("/");
   } catch (error) {
     // console.log(error);
@@ -104,6 +107,7 @@ export const deleteVideos = async (req, res) => {
     return res.status(404).render("404", { pageTitle: "Video not found." });
   }
   if (String(video.owner) !== String(req.session.user._id)) {
+    req.flash("error", "You are not the owner of the video");
     return res.status(403).redirect("/");
   }
   await Video.findByIdAndDelete(id);
@@ -141,4 +145,6 @@ export const registerView = async (req, res) => {
   video.meta.views = video.meta.views + 1;
   await video.save();
   return res.sendStatus(200);
+  // 그냥 status(200)만 return하게되면 끝나지 않음. status를 쓰는경우에는 뒤에 redirect,render 등 다른 메소드를 써줘야함
+  // sendStatus를 하게되면 뒤에 다른 메소드를 쓰지 않아도 작업을 끝낼 수 있게됨
 };
