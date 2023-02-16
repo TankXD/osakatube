@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
   name: { type: String, require: true },
   location: String,
   // 한명의 user는 복수의 video를 받기 때문에 array(배열)로 만들어줘야한다.
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }],
 });
 

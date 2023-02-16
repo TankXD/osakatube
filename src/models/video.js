@@ -13,6 +13,9 @@ const videoSchema = new mongoose.Schema({
     views: { type: Number, default: 0, required: true },
     rating: { type: Number, default: 0, required: true },
   },
+
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+
   // ObjectId를 type으로 쓰는 것은 js의 기능이 아닌, mongoose의 기능
   // ref 속성이 매우 중요한데, 이ObjectId의 출처를 써야하고, 그 출처가 되는 스키마모델과의 연결(관계)을 해준다
   // ref속성을 통해서 owner데이터 안에 Id뿐 아니라, 해당Id와 연결된 User의 데이터를 가져올 수 있음.

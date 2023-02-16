@@ -26,6 +26,14 @@ app.set("views", process.cwd() + "/src/views");
 app.use(logger);
 // 순서도 중요하다.
 app.use(express.urlencoded({ extended: true }));
+// express.urlencoded 미들웨어로 웹사이트로 들어오는 form을 서버(백엔드)가 이해하도록 만들어줌
+
+// app.use(express.text());
+// -> express.text()미들웨어로 웹사이트에 request(fetch등으로)로 들어오는 text를 서버(백엔드)가 이해하도록 만들어줌
+// 다만 text가아닌 object를 보내는 경우 의미가 없음
+app.use(express.json());
+// object를 JSON.stringify함수로 text로 변환해서 보낸 경우
+// text로 변환된 object를 사용하기 위해서는 express.json()미들웨어가 필요함.
 
 app.use(
   session({

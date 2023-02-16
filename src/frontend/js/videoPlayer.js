@@ -110,10 +110,10 @@ const handleMouseLeave = () => {
   controlsTimeoutId = setTimeout(hideControls, 300);
 };
 const handleKeyDown = (e) => {
-  if (e.key === " ") {
+  if (e.target === document.body && e.key === " ") {
     handlePlayClick();
   }
-  if (e.key === "m") {
+  if (e.target === document.body && e.key === "m") {
     handleMuteClick();
   }
 };
@@ -121,7 +121,6 @@ const handleKeyDown = (e) => {
 const handleEnded = () => {
   const { id } = videoContainer.dataset;
   fetch(`/api/videos/${id}/views`, { method: "POST" });
-  console.log(id);
 };
 
 playBtn.addEventListener("click", handlePlayClick);

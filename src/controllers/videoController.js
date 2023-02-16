@@ -1,5 +1,7 @@
+import { async } from "regenerator-runtime";
 import User from "../models/user";
 import Video from "../models/video";
+import Comment from "../models/comment";
 
 export const home = async (req, res) => {
   const videos = await Video.find({})
@@ -11,7 +13,7 @@ export const home = async (req, res) => {
 export const watchVideos = async (req, res) => {
   const { id } = req.params;
   //const id = req.params.id와 같은방법. 하지만 ES6문법으로 쓰면 위에 방식이 된다.
-  const video = await Video.findById(id).populate("owner");
+  const video = await Video.findById(id).populate("owner").populate("comments");
   console.log(video);
   if (!video) {
     // (video === null)로 입력하는 것과 같다.
@@ -147,4 +149,46 @@ export const registerView = async (req, res) => {
   return res.sendStatus(200);
   // 그냥 status(200)만 return하게되면 끝나지 않음. status를 쓰는경우에는 뒤에 redirect,render 등 다른 메소드를 써줘야함
   // sendStatus를 하게되면 뒤에 다른 메소드를 쓰지 않아도 작업을 끝낼 수 있게됨
+};
+
+export const createComment = async (req, res) => {
+  const {
+    params: { id },
+    body: { text },
+    session: { user },
+  } = req;
+
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.sendStatus(404);
+  }
+  const comment = await Comment.create({
+    text,
+    owner: user._id,
+    video: id,
+  });
+  video.comments.push(comment._id);
+  video.save();
+  console.log(video.owner);
+  return res.status(201).json({ newCommentId: comment._id });
+};
+
+export const deleteComment = async (req, res) => {
+  const {
+    params: { id },
+    body: { commentId },
+  } = req;
+  const comment = await Comment.findById(commentId);
+  const video = await Video.findById(id);
+  if (!comment) {
+    return res.status(404).render("404", { pageTitle: "Comment not found." });
+  }
+  if (String(comment.owner) !== String(req.session.user._id)) {
+    req.flash("error", "You are not the owner of the comment");
+    return res.status(403).redirect("/");
+  }
+  await Comment.findByIdAndDelete(commentId);
+  video.comments.splice(video.comments.indexOf(commentId), 1);
+  video.save();
+  return res.sendStatus(201);
 };

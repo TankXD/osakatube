@@ -6,11 +6,15 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 
+const BASE_JS = "./src/frontend/js/";
+// 매번 경로를 쓰면 오타도 날 수 있기에 경로전용 변수를 만듬
+
 module.exports = {
   // entry속성 : 최신코드로 작성한 webpack으로 처리할 js파일의 경로를 입력.
   entry: {
-    main: "./src/frontend/js/main.js",
-    videoPlayer: "./src/frontend/js/videoPlayer.js",
+    main: BASE_JS + "main.js",
+    videoPlayer: BASE_JS + "videoPlayer.js",
+    commentSection: BASE_JS + "commentSection.js",
     // recorder: "./src/frontend/js/recorder.js",
   },
   watch: true,

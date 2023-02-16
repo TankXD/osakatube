@@ -1,8 +1,10 @@
 extends base.pug
 
 block content 
+    //- 시청중인 비디오 ID를 가져오기위해 data-id에 video._id를 씀. 
+    //- 이러면 javascript파일에서 #videoContainer를 가져온후 videoContainer.dataset.id로 video아이디를 가져올 수 있음
     div#videoContainer(data-id=video._id)
-        video(src="/"+video.fileUrl) 
+        video(src="/"+video.fileUrl,width=1200,height=675) 
         div#videoControls.videoControls.showing
             div.videoControls__play
                 span#play.videoControls__playBtn
@@ -31,6 +33,24 @@ block content
             a(href=`${video.id}/edit`) edit Video &rarr;
             br
             a(href=`${video.id}/delete`) delete Video &rarr;
-
+    if loggedIn
+        div.video__add-comments
+            form.video__comments-form#commentForm
+                textarea(cols="30", rows="10", placeholder="Write a nice comment...")
+                button Add Comment  
+    div.video__comments
+        ul
+            each comment in video.comments.reverse()
+                li.video__comment(data-id=comment._id)
+                    i.fas.fa-comment
+                    span  #{comment.text}
+                    if String(loggedInUser._id) === String(comment.owner._id)
+                        span.video__comment-deleteBtn="❌"
     block javascript 
          script(src="/static/js/videoPlayer.js")
+         if loggedIn
+            script(src="/static/js/commentSection.js")
+//- 로그인하지않으면 comment form이 안보이니까 어차피 commentSection.js파일에서
+//- form 등 태그들을 가져오지 못함. 그렇기에 로그인헀을 경우에만 commentSection.js파일을 사용
+//- 폴더명static = frontend폴더와 동일
+//- 내가 그렇게 설졍했기때문
