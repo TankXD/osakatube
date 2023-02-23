@@ -17,10 +17,13 @@ module.exports = {
     commentSection: BASE_JS + "commentSection.js",
     // recorder: "./src/frontend/js/recorder.js",
   },
-  watch: true,
   plugins: [new MiniCssExtractPlugin({ filename: "css/styles.css" })],
   //   mode속성 : 현재 코드가 development(개발중)인지, production(완성)된건지 알려줘야함. (완성본이라면 webpack으로 변형할 때 압축해서 변형해줌.)
-  mode: "development",
+  // mode: "development",
+  // 개발중이아닌 배포하기위해 build하는 경우 development모드면 코드가 길어지기때문에, mode는 script명령어실행할때 따로 전달해서 정하기.
+  // watch: true,
+  // watch또한 개발중인경우에 계속 프론트엔드코드가 자동갱신되면서 확인하기위해 쓰는것인데 build하는경우 따로 mode처럼 script명령어에 전달해서 정한다.
+
   // output속성 : 파일을 webpack에서 처리한 후에 어떤 경로에 어떤파일명으로 저장할지 설정해주는 속성
   output: {
     filename: "js/[name].js",
