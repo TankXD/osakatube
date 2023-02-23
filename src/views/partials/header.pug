@@ -22,9 +22,13 @@ header
                 li.header__profile
                     a(href=`/users/${loggedInUser._id}`)
                         if loggedInUser.avatarUrl === ""
-                            span.header__avatar--empty no image
+                            span.header__avatar--empty 😀
                         else
-                            img(src="/" + loggedInUser.avatarUrl).header__avatar
+                            if loggedInUser.avatarUrl.includes("github")
+                                img.header__avatar(src=loggedInUser.avatarUrl)
+                            else 
+                                img.header__avatar(src="/" + loggedInUser.avatarUrl)
+                            
             else    
                 li  
                     a(href="/login") Login                        

@@ -51,7 +51,7 @@ app.use(
       // 10분으로 설정된 상태임.
     },
     store: MongoStore.create({
-      mongoUrl: process.env.DB_URL,
+      mongoUrl: process.env.MONGO_ATLAS_URL,
     }),
     // secrit, mongoUrl값은 공개되면 안되기에 environment file(환경변수)를 사용한다.
   })
