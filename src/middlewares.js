@@ -1,9 +1,12 @@
 import multer from "multer";
 
+// const flyIo = precess.env.NODE_ENV;
+
 export const localMiddleware = (req, res, next) => {
   res.locals.siteName = "Tanktube";
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.loggedInUser = req.session.user || {};
+  // res.locals.flyIo = flyIo;
   // console.log(res.locals);
   next();
 };

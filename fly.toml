@@ -1,4 +1,4 @@
-# fly.toml file generated for osaka-tube on 2023-02-23T18:38:11+09:00
+# fly.toml file generated for osaka-tube on 2023-02-24T15:52:07+09:00
 
 app = "osaka-tube"
 kill_signal = "SIGINT"
@@ -6,9 +6,11 @@ kill_timeout = 5
 processes = []
 
 [build]
-  Dockerfile = "Dockerfile"
+  [build.args]
+    Dockerfile = "Dockerfile"
 
 [env]
+  PORT = "8080"
 
 [experimental]
   auto_rollback = true

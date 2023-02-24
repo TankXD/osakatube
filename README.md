@@ -1,20 +1,16 @@
-#Tanktube
+# 🌍Osaka-Tube
 
-/ ->home
-/join ->Join
-/login ->Login
-/search ->search
+---
 
-/users/:id/edit -> edit user
-/users/logout -> log out
-/users/edit -> edit my profile
-/users/delete ->delete my profile
+## 🚁PROJECT
 
-/videos/:id -> see video
-/videos/:id/edit ->Edit video
-/videos/:id/delete ->delete video
-/videos/upload -> Upload video
+[CLICK](https://osaka-tube.fly.dev/)
 
-<!-- /videos/comments -> comment on a video
-/videos/comments/delete -> delete a comment of a video
-/videos/comments/edit -> edit comment -->
+---
+
+## 🔥 開発環境
+
+- **frontend** : HTML5, SCSS, PUG, JAVASCRIPT
+- **backend** : Node.JS, MongoDB, Express
+- **library** : multer, webpack,express-session, babel, multer など
+- **deploy** : fly.io, Mongo Atlas, AWS S3

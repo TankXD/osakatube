@@ -1,8 +1,6 @@
-.dockerignore
-node_modules
-**/.env
-uploads
-**/.DS_Store
 fly.toml
 Dockerfile
+.dockerignore
+node_modules
 .git
+.uploads
