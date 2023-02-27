@@ -16,6 +16,7 @@ import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import { localMiddleware } from "./middlewares";
 import apiRouter from "./routers/apiRouter";
+import cors from "cors";
 
 const app = express();
 
@@ -71,6 +72,11 @@ app.use(flash());
 // 중요한건 express.static("폴더명")을 입력해야함.
 app.use("/uploads", express.static("uploads"));
 app.use("/static", express.static("assets"));
+// app.use((req, res, next) => {
+//   res.header("Cross-Origin-Embedder-Policy", "require-corp");
+//   res.header("Cross-Origin-Opener-Policy", "same-origin");
+//   next();
+// });
 app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);

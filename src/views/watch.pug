@@ -4,7 +4,10 @@ block content
     //- 시청중인 비디오 ID를 가져오기위해 data-id에 video._id를 씀. 
     //- 이러면 javascript파일에서 #videoContainer를 가져온후 videoContainer.dataset.id로 video아이디를 가져올 수 있음
     div#videoContainer(data-id=video._id)
-        video(src="/"+video.fileUrl,width=1200,height=675) 
+        if isFlyIo
+            video(src=video.fileUrl,crossorigin,width=1200,height=675)
+        else
+            video(src="/" + video.fileUrl,width=1200,height=675) 
         div#videoControls.videoControls.showing
             div.videoControls__play
                 span#play.videoControls__playBtn

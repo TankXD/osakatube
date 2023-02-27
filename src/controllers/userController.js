@@ -84,6 +84,7 @@ export const postLogin = async (req, res) => {
       .render("login", { pageTitle: "Login", errorMessage: "Wrong password" });
   }
   console.log("Log user in");
+  console.log(user);
   req.session.loggedIn = true;
   req.session.user = user;
   return res.redirect("/");
@@ -159,6 +160,7 @@ export const finishGithubLogin = async (req, res) => {
     }
     req.session.loggedIn = true;
     req.session.user = user;
+    console.log(user);
     return res.redirect("/");
   } else {
     return res.redirect("/login");
@@ -205,7 +207,11 @@ export const postEditUser = async (req, res) => {
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
-      avatarUrl: file ? file.path : avatarUrl,
+      avatarUrl: file
+        ? res.locals.isFlyIo
+          ? file.location
+          : file.path
+        : avatarUrl,
       username,
       email,
       location,
@@ -214,6 +220,7 @@ export const postEditUser = async (req, res) => {
     // new:true설정을 안해두면 모델.findByIdAndUpdate메소드는 업데이트 되기 전의 정보를 반환해줌.
     // new:true를 설정해두면 업데이트된 후의 데이터를 반환해준다.
   );
+  console.log(updatedUser);
   req.session.user = updatedUser;
 
   return res.redirect("/users/edit");

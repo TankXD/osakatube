@@ -24,8 +24,8 @@ header
                         if loggedInUser.avatarUrl === ""
                             span.header__avatar--empty 😀
                         else
-                            if loggedInUser.socialOnly
-                                img.header__avatar(src=loggedInUser.avatarUrl)
+                            if isFlyIo
+                                img.header__avatar(src=loggedInUser.avatarUrl,crossorigin)
                             else 
                                 img.header__avatar(src="/" + loggedInUser.avatarUrl)
                             

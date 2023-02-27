@@ -1,12 +1,32 @@
 import multer from "multer";
+import aws from "aws-sdk";
+import multerS3 from "multer-s3";
 
-// const flyIo = precess.env.NODE_ENV;
+const isFlyIo = process.env.NODE_ENV === "production";
+
+export const s3 = new aws.S3({
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  },
+});
+
+export const s3ImageUploader = multerS3({
+  s3: s3,
+  bucket: "osaka-tube-bucket/images",
+  acl: "public-read-write",
+});
+export const s3VideoUploader = multerS3({
+  s3: s3,
+  bucket: "osaka-tube-bucket/videos",
+  acl: "public-read-write",
+});
 
 export const localMiddleware = (req, res, next) => {
   res.locals.siteName = "Tanktube";
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.loggedInUser = req.session.user || {};
-  // res.locals.flyIo = flyIo;
+  res.locals.isFlyIo = isFlyIo;
   // console.log(res.locals);
   next();
 };
@@ -39,10 +59,12 @@ export const publicOnlyMiddleware = (req, res, next) => {
 export const uploadAvatar = multer({
   dest: "uploads/avatars/",
   limits: { fileSize: 3000000 },
+  storage: isFlyIo ? s3ImageUploader : undefined,
 });
 export const uploadVideo = multer({
   dest: "uploads/videos/",
   limits: { fileSize: 30000000 },
+  storage: isFlyIo ? s3VideoUploader : undefined,
 });
 
 // dest속성 :  multer를 통해 브라우저에서 file을 받을 때 백엔드의 어떤 경로에 받을 지 정하는 속성
