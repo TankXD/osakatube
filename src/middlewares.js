@@ -23,7 +23,7 @@ export const s3VideoUploader = multerS3({
 });
 
 export const localMiddleware = (req, res, next) => {
-  res.locals.siteName = "Tanktube";
+  res.locals.siteName = "OsakaTube";
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.loggedInUser = req.session.user || {};
   res.locals.isFlyIo = isFlyIo;
