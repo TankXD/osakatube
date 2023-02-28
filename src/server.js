@@ -72,6 +72,7 @@ app.use(flash());
 // 중요한건 express.static("폴더명")을 입력해야함.
 app.use("/uploads", express.static("uploads"));
 app.use("/static", express.static("assets"));
+app.use("/image", express.static("image"));
 // app.use((req, res, next) => {
 //   res.header("Cross-Origin-Embedder-Policy", "require-corp");
 //   res.header("Cross-Origin-Opener-Policy", "same-origin");
