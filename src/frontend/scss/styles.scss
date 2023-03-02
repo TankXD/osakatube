@@ -10,6 +10,7 @@
 @import "./components/forms.scss";
 @import "./components/social-login.scss";
 @import "./components/video-player.scss";
+@import "./components/comment.scss";
 
 //screens
 @import "./screens/home.scss";
@@ -17,16 +18,26 @@
 @import "./screens/profile.scss";
 @import "./screens/edit-profile.scss";
 @import "./screens/watch.scss";
+
+//font
+@import url("https://fonts.googleapis.com/css2?family=Jua&family=Nunito:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: $bg;
-  color: white;
+  // font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  //   Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Nunito", sans-serif;
+  // background-color: $bg;
+  background-color: $white;
+  color: $bg;
 }
 
 main {

@@ -12,8 +12,10 @@
   //   low로 2개, columns 3개로하면 2행 3열이 됨.
 }
 .auth-switch {
+  font-weight: $bold;
   text-align: center;
   margin-top: 40px;
+  color: $semi-light-bg;
   a {
     text-decoration: underline;
   }

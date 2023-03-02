@@ -11,6 +11,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: inherit;
   // flex-direction: row;
   border-bottom: 1px solid rgba($color: white, $alpha: 0.1);
   .flex1,
@@ -39,20 +40,21 @@ header {
   }
   .search__form {
     display: flex;
-    width: 100%;
-    position: relative;
+    width: 80%;
     align-items: center;
+    position: relative;
 
     input {
+      display: flex;
       all: unset;
-      padding: 15px 20px;
-      border-radius: 5px;
+      padding: 15px 22px;
+      border-radius: 15px;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      background-color: black;
+      background-color: $light-gray;
       margin-bottom: 5px;
       font-size: 16px;
-      color: white;
-      width: 90%;
+      color: $bg;
+      width: 100%;
     }
     button {
       all: unset;
@@ -60,8 +62,10 @@ header {
     button {
       // border: 1px solid rgba(255, 255, 255, 0.2);
       position: absolute;
-      right: 15px;
+      right: 25px;
       top: 17px;
+      color: $bg;
+      font-weight: $bold;
       background-color: rgba(0, 0, 0, 0);
       text-align: center;
       font-size: 18px;
@@ -71,12 +75,13 @@ header {
 
   ul {
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
+
     li {
       margin-left: 30px;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: $bold;
       &:not(.header__profile) {
         text-transform: uppercase;
       }

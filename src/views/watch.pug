@@ -36,19 +36,26 @@ block content
             a(href=`${video.id}/edit`) edit Video &rarr;
             br
             a(href=`${video.id}/delete`) delete Video &rarr;
-    if loggedIn
-        div.video__add-comments
-            form.video__comments-form#commentForm
-                textarea(cols="30", rows="10", placeholder="Write a nice comment...")
-                button Add Comment  
-    div.video__comments
-        ul
-            each comment in video.comments.reverse()
-                li.video__comment(data-id=comment._id)
-                    i.fas.fa-comment
-                    span  #{comment.text}
-                    if String(loggedInUser._id) === String(comment.owner._id)
-                        span.video__comment-deleteBtn="❌"
+    div.video__comments-section
+        if loggedIn
+            div.video__comments-add__container
+                div.video__comments-user
+                    if isFlyIo
+                        img.video__comment-avatar(src=loggedInUser.avatarUrl,crossorigin)
+                    else 
+                        img.video__comment-avatar(src="/" + loggedInUser.avatarUrl)
+                form.video__comments-form#commentForm
+                    textarea(cols="30", rows="10", placeholder="Write a nice comment...")
+                    button COMMENT
+        div.video__comments
+            ul
+                each comment in video.comments.reverse()
+                    li.video__comment(data-id=comment._id)
+                        i.fas.fa-comment
+                        //- img(src="/" + comment.owner.avatarUrl)
+                        span  #{comment.text}
+                        if String(loggedInUser._id) === String(comment.owner._id)
+                            span.video__comment-deleteBtn="❌"
     block javascript 
          script(src="/static/js/videoPlayer.js")
          if loggedIn
