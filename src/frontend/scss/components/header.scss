@@ -1,18 +1,74 @@
 header {
+  position: fixed;
+  box-sizing: border-box;
+  z-index: 5;
+  top: 0;
+  // left: 0;
+  // right: 0;
+  width: 100%;
+  height: 80px;
   padding: 15px 45px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  // flex-direction: row;
   border-bottom: 1px solid rgba($color: white, $alpha: 0.1);
-
+  .flex1,
+  .flex3 {
+    flex: 1 1 20em;
+  }
+  .flex2 {
+    flex: 1 1 650px;
+  }
   .header__logo {
-    // color: $red;
-    // font-size: 36px;
-    img {
-      width: 38px;
-      height: 38px;
+    .header__icon {
+      // color: $red;
+      // font-size: 36px;
+      img {
+        width: 26px;
+        height: 26px;
+        vertical-align: text-bottom;
+      }
+      span {
+        padding: 3px;
+        font-weight: 600;
+        font-size: 22px;
+        letter-spacing: -1.7px;
+      }
     }
   }
+  .search__form {
+    display: flex;
+    width: 100%;
+    position: relative;
+    align-items: center;
+
+    input {
+      all: unset;
+      padding: 15px 20px;
+      border-radius: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background-color: black;
+      margin-bottom: 5px;
+      font-size: 16px;
+      color: white;
+      width: 90%;
+    }
+    button {
+      all: unset;
+    }
+    button {
+      // border: 1px solid rgba(255, 255, 255, 0.2);
+      position: absolute;
+      right: 15px;
+      top: 17px;
+      background-color: rgba(0, 0, 0, 0);
+      text-align: center;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  }
+
   ul {
     display: flex;
     justify-content: space-between;
