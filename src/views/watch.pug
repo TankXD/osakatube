@@ -24,26 +24,53 @@ block content
             div 
                 span#fullScreen
                     i.fas.fa-expand
-    if String(video.owner._id) === String (loggedInUser._id)
-        div 
-            p #{video.description}
-            small #{video.createdAt}
-        div 
-            a(href=`/users/${video.owner._id}`)  Uploaded By #{video.owner.name}
-        hr
+    //- if String(video.owner._id) === String (loggedInUser._id)
+    div.video__data
+        div.video__data-info 
+            p.video__data-hashtag #{video.hashtags}
+            h1.video__data-title #{video.title}
+            div.video__data-meta
+                span.video__data-meta__view #{video.meta.views} #{video.meta.views > 1 ? "views" : "view"} • 
+                span.video__data-meta__date=new Date(video.createdAt).toLocaleDateString("canada")
+        div.video__data-like
+            button.video__data-like__btn
+                span 🤍
+    div.video__owner-data
+        a(href=`/users/${video.owner._id}`)
+            if !video.owner.avatarUrl
+                div.header__avatar--empty.avatar-m
+                    i.fas.fa-user
+            else
+                if isFlyIo
+                    img.video__owner-data__avatar(src=video.owner.avatarUrl,crossorigin)
+                else 
+                    img.video__owner-data__avatar(src="/" + video.owner.avatarUrl)
+        div.video__owner-data__info
+            div.video__owner-data__info-name
+                a(href=`/users/${video.owner._id}`)
+                    p #{video.owner.name}
+            div.video__owner-data__info-sub
+                small 0 Subscriber
+    div.video__data-description
+        p #{video.description}
         //- h4 #{video.views} #{video.views === 1 ? "view" : "views"}
-        if String(loggedInUser._id) === String(video.owner._id)
-            a(href=`${video.id}/edit`) edit Video &rarr;
-            br
-            a(href=`${video.id}/delete`) delete Video &rarr;
+    
+    if String(loggedInUser._id) === String(video.owner._id)
+        a(href=`${video.id}/edit`) edit Video &rarr;
+        br
+        a(href=`${video.id}/delete`) delete Video &rarr;
     div.video__comments-section
         if loggedIn
             div.video__comments-add__container
                 div.video__comments-user
-                    if isFlyIo
-                        img.video__comment-avatar(src=loggedInUser.avatarUrl,crossorigin)
-                    else 
-                        img.video__comment-avatar(src="/" + loggedInUser.avatarUrl)
+                    if !loggedInUser.avatarUrl
+                        div.header__avatar--empty.avatar-s
+                            i.fas.fa-user
+                    else
+                        if isFlyIo
+                            img.video__comment-avatar(src=loggedInUser.avatarUrl,crossorigin)
+                        else 
+                            img.video__comment-avatar(src="/" + loggedInUser.avatarUrl)
                 form.video__comments-form#commentForm
                     textarea(cols="30", rows="10", placeholder="Write a nice comment...")
                     button COMMENT
@@ -51,13 +78,28 @@ block content
             ul
                 each comment in video.comments.reverse()
                     li.video__comment(data-id=comment._id)
-                        i.fas.fa-comment
-                        //- img(src="/" + comment.owner.avatarUrl)
-                        span  #{comment.text}
+                        div.video__comment-added
+                            div.video__comment-added__avatar
+                                a(href=`/users/${comment.owner._id}`)
+                                    if !comment.owner.avatarUrl
+                                        div.header__avatar--empty.avatar-s
+                                            i.fas.fa-user
+                                    else
+                                        if isFlyIo
+                                            img.video__comment-avatar(src=comment.owner.avatarUrl,crossorigin)
+                                        else 
+                                            img.video__comment-avatar(src="/" + comment.owner.avatarUrl)
+                            div.video__comment-added__info
+                                div.video-comment-added__info-main
+                                    h4 #{comment.owner.username} 
+                                    span #{new Date(comment.createdAt).toLocaleDateString("canada")}
+                                span #{comment.text}
                         if String(loggedInUser._id) === String(comment.owner._id)
-                            span.video__comment-deleteBtn="❌"
+                            button.video__comment-deleteBtn
+                                span="❌"
     block javascript 
          script(src="/static/js/videoPlayer.js")
+         script(src="/static/js/likeVideo.js")
          if loggedIn
             script(src="/static/js/commentSection.js")
 //- 로그인하지않으면 comment form이 안보이니까 어차피 commentSection.js파일에서

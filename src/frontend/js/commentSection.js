@@ -3,21 +3,68 @@ const form = document.getElementById("commentForm");
 const deleteCommentBtn = document.querySelectorAll(".video__comment-deleteBtn");
 
 const videoId = videoContainer.dataset.id;
+const isFlyIo = process.env.NODE_ENV === "production";
 
-const addComment = (text, id) => {
+const addComment = (comment) => {
   const videoComments = document.querySelector(".video__comments ul");
   const newComment = document.createElement("li");
   newComment.className = "video__comment";
-  newComment.dataset.id = id;
-  const icon = document.createElement("i");
-  icon.className = "fas fa-comment";
-  const span = document.createElement("span");
-  span.innerText = ` ${text}`;
-  const deleteBtn = document.createElement("span");
-  deleteBtn.innerText = "❌";
-  newComment.appendChild(icon);
-  newComment.appendChild(span);
+  newComment.dataset.id = comment._id;
+
+  const commentAdded = document.createElement("div");
+  commentAdded.className = "video__comment-added";
+  const commentAddedAvatar = document.createElement("div");
+  commentAddedAvatar.className = "video__comment-added__avatar";
+  const ownerLink = document.createElement("a");
+  ownerLink.href = `/users/${comment.owner._id}`;
+  if (!comment.owner.avatarUrl) {
+    const avatarEmpty = document.createElement("div");
+    avatarEmpty.className = "header__avatar--empty avatar-s";
+    const EmptyIcon = document.createElement("i");
+    EmptyIcon.className = "fas fa-user";
+    avatarEmpty.appendChild(EmptyIcon);
+    ownerLink.appendChild(avatarEmpty);
+  } else {
+    const avatar = document.createElement("img");
+    avatar.className = "video__comment-avatar";
+    if (isFlyIo) {
+      avatar.src = comment.owner.avatarUrl;
+      avatar.crossOrigin = "crossorigin";
+    } else {
+      avatar.src = "/" + comment.owner.avatarUrl;
+    }
+    ownerLink.appendChild(avatar);
+  }
+  const commentInfo = document.createElement("div");
+  commentInfo.className = "video__comment-added__info";
+  const commentInfoMain = document.createElement("div");
+  commentInfoMain.className = "video-comment-added__info-main";
+  const commentUsername = document.createElement("h4");
+  commentUsername.innerText = `${comment.owner.username} `;
+  const commentDate = document.createElement("span");
+  commentDate.innerText = new Date(comment.createdAt).toLocaleDateString(
+    "canada"
+  );
+  const commentText = document.createElement("span");
+  commentText.innerText = `${comment.text}`;
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.className = "video__comment-deleteBtn";
+  const deleteSpan = document.createElement("span");
+  deleteSpan.innerText = "❌";
+
+  commentAddedAvatar.appendChild(ownerLink);
+  commentInfo.appendChild(commentInfoMain);
+  commentInfo.appendChild(commentText);
+  commentInfoMain.appendChild(commentUsername);
+  commentInfoMain.appendChild(commentDate);
+  deleteBtn.appendChild(deleteSpan);
+  commentAdded.appendChild(commentAddedAvatar);
+  commentAdded.appendChild(commentInfo);
+
+  newComment.appendChild(commentAdded);
   newComment.appendChild(deleteBtn);
+
   videoComments.prepend(newComment);
   // appendChild() -> 엘레먼트를 순서대로 추가함, 즉 새로운 것은 뒤에 달린
   // prepend() -> 엘레먼트를 역순서대로 추가함, 새로운 것은 앞에 달림.
@@ -26,6 +73,7 @@ const addComment = (text, id) => {
 };
 
 const handleDeleteComment = async (event) => {
+  event.preventDefault();
   const comment = event.currentTarget.parentElement;
   const commentId = comment.dataset.id;
   // console.log(commentId);
@@ -62,9 +110,11 @@ const handleSubmit = async (event) => {
 
   if (response.status === 201) {
     textarea.value = "";
-    const json = await response.json();
-    const newCommentId = json.newCommentId;
-    addComment(text, newCommentId);
+    const { commentInfoJSON } = await response.json();
+    const commentInfo = JSON.parse(commentInfoJSON);
+    addComment(commentInfo);
+    // const newCommentId = json.newCommentId;
+    // addComment(text, newCommentId);
   }
 };
 

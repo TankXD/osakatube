@@ -5,10 +5,14 @@ block content
         div.profile__data 
             //- if loggedInUser.avatarUrl === ""
             //-     span.avatar--empty NO IMAGE
-            if isFlyIo
-                img(src=user.avatarUrl,crossorigin).avatar
+            if !loggedInUser.avatarUrl
+                div.header__avatar--empty.profile__avatar.avatar-big
+                    i.fas.fa-user
             else
-                img(src="/"+ user.avatarUrl).avatar
+                if isFlyIo
+                    img(src=user.avatarUrl,crossorigin).avatar
+                else
+                    img(src="/"+ user.avatarUrl).avatar
             h3=user.name 
         div.video-grid
             each video in user.videos

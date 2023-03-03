@@ -29,8 +29,9 @@ header
                         a(href="/users/logout") Logout
                 li.header__profile
                     a(href=`/users/${loggedInUser._id}`)
-                        if loggedInUser.avatarUrl === ""
-                            span.header__avatar--empty 😀
+                        if !loggedInUser.avatarUrl
+                            div.header__avatar--empty.avatar-s
+                                i.fas.fa-user
                         else
                             if isFlyIo
                                 img.header__avatar(src=loggedInUser.avatarUrl,crossorigin)
