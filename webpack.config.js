@@ -15,6 +15,7 @@ module.exports = {
     main: BASE_JS + "main.js",
     videoPlayer: BASE_JS + "videoPlayer.js",
     commentSection: BASE_JS + "commentSection.js",
+    header: BASE_JS + "header.js",
     // recorder: "./src/frontend/js/recorder.js",
   },
   plugins: [new MiniCssExtractPlugin({ filename: "css/styles.css" })],

@@ -13,7 +13,7 @@ header {
   align-items: center;
   background-color: inherit;
   // flex-direction: row;
-  border-bottom: 1px solid rgba($color: white, $alpha: 0.1);
+  border-bottom: 1px solid rgba($color: $white, $alpha: 0.1);
   .flex1,
   .flex3 {
     flex: 1 1 20em;
@@ -90,8 +90,55 @@ header {
       font-size: 16px;
     }
   }
+
+  .header__hamburger__menu {
+    position: relative;
+    .header__hamburger__menu-btn {
+      border: 0;
+      padding: 15px;
+      border-radius: 100px;
+      transition: background-color 0.1s ease-in-out;
+      cursor: pointer;
+      i {
+        font-size: 1.3rem;
+      }
+      &:hover {
+        background-color: $super-light-gray;
+      }
+    }
+    .header__hamburger__menu-list {
+      z-index: 1;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      background-color: $white;
+      border-radius: 10px;
+      border: 1px solid #e5e5e5;
+      box-shadow: 1px 2px 2px #ccc;
+      width: 150px;
+      top: 105%;
+      right: 22px;
+      transition: all 0.1s ease-in-out;
+      a {
+        padding: 15px;
+        &:first-child {
+          border-radius: 10px 10px 0 0;
+        }
+        &:last-child {
+          border-radius: 0 0 10px 10px;
+        }
+        &:hover {
+          background-color: $super-light-gray;
+        }
+      }
+    }
+    .hamburger__hidden {
+      visibility: hidden;
+    }
+  }
+
   .header__btn {
-    background-color: white;
+    background-color: $white;
     color: $bg;
     padding: 5px 10px;
     border-radius: 5px;

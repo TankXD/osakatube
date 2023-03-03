@@ -20,12 +20,13 @@ header
             //-     a(href="/search") 
             //-         i.fas.fa-search
             if loggedIn
-                li  
-                    a(href="/videos/upload") Upload video
-                li 
-                    a(href="/users/edit") Edit Profile
-                li
-                    a(href="/users/logout") Logout
+                li.header__hamburger__menu 
+                    button.header__hamburger__menu-btn
+                        i.fas.fa-bars
+                    div.header__hamburger__menu-list.hamburger__hidden
+                        a(href="/videos/upload") Upload video
+                        a(href="/users/edit") Edit Profile
+                        a(href="/users/logout") Logout
                 li.header__profile
                     a(href=`/users/${loggedInUser._id}`)
                         if loggedInUser.avatarUrl === ""

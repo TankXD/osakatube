@@ -9,7 +9,8 @@ html(lang="ko")
         link(rel="icon",type="image/png", href="/image/favicon-16x16.png", sizes="16x16")
         link(rel="icon",type="image/png", href="/image/favicon-32x32.png", sizes="32x32")
         link(rel="apple-touch-icon", sizes="180x180" ,href="/image/apple-touch-icon.png")
-
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap")
+        
     body
         if messages.error
             +message("error",messages.error)
@@ -22,4 +23,6 @@ html(lang="ko")
             block content
         include partials/footer.pug
     block script 
-       script(src="/static/js/main.js") 
+       script(src="/static/js/main.js")
+       script(src="/static/js/header.js")
+    //-    script(src="https://kit.fontawesome.com/84cbe2bb98.js", crossorigin="anonymous")
