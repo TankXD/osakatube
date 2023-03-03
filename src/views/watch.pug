@@ -82,17 +82,17 @@ block content
                         div.video__comment-added
                             div.video__comment-added__avatar
                                 a(href=`/users/${comment.owner._id}`)
-                                    if !comment.owner.avatarUrl
+                                    if !comment.ownerAvatar
                                         div.video__comment-avatar__empty.avatar-s
                                             i.fas.fa-user
                                     else
                                         if isFlyIo
-                                            img.video__comment-avatar(src=comment.owner.avatarUrl,crossorigin)
+                                            img.video__comment-avatar(src=comment.ownerAvatar,crossorigin)
                                         else 
-                                            img.video__comment-avatar(src="/" + comment.owner.avatarUrl)
+                                            img.video__comment-avatar(src="/" + comment.ownerAvatar)
                             div.video__comment-added__info
                                 div.video-comment-added__info-main
-                                    h4 #{comment.owner.username} 
+                                    h4 #{comment.ownerName} 
                                     span #{new Date(comment.createdAt).toLocaleDateString("canada")}
                                 span #{comment.text}
                         if String(loggedInUser._id) === String(comment.owner._id)

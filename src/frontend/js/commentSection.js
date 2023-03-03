@@ -19,7 +19,7 @@ const addComment = (comment) => {
   ownerLink.href = `/users/${comment.owner._id}`;
   if (!comment.owner.avatarUrl) {
     const avatarEmpty = document.createElement("div");
-    avatarEmpty.className = "header__avatar--empty avatar-s";
+    avatarEmpty.className = "video__comment-avatar__empty avatar-s";
     const EmptyIcon = document.createElement("i");
     EmptyIcon.className = "fas fa-user";
     avatarEmpty.appendChild(EmptyIcon);

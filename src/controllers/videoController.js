@@ -13,10 +13,7 @@ export const home = async (req, res) => {
 export const watchVideos = async (req, res) => {
   const { id } = req.params;
   //const id = req.params.id와 같은방법. 하지만 ES6문법으로 쓰면 위에 방식이 된다.
-  const video = await Video.findById(id)
-    .populate("owner")
-    .populate("comments")
-    .populate("owner");
+  const video = await Video.findById(id).populate("owner").populate("comments");
   console.log(video);
   if (!video) {
     // (video === null)로 입력하는 것과 같다.
@@ -171,6 +168,8 @@ export const createComment = async (req, res) => {
     session: { user },
   } = req;
 
+  const userSave = await User.findById(user);
+
   const video = await Video.findById(id);
   if (!video) {
     return res.sendStatus(404);
@@ -178,13 +177,14 @@ export const createComment = async (req, res) => {
   const comment = await Comment.create({
     text,
     owner: user._id,
+    ownerAvatar: userSave.avatarUrl,
+    ownerName: userSave.username,
     video: id,
   });
 
   video.comments.push(comment._id);
   video.save();
 
-  const userSave = await User.findById(user);
   userSave.comments.push(comment._id);
   userSave.save();
 
