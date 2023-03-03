@@ -76,13 +76,14 @@ block content
                     button COMMENT
         div.video__comments
             ul
+                //- each comment in comments.reverse()
                 each comment in video.comments.reverse()
                     li.video__comment(data-id=comment._id)
                         div.video__comment-added
                             div.video__comment-added__avatar
                                 a(href=`/users/${comment.owner._id}`)
                                     if !comment.owner.avatarUrl
-                                        div.header__avatar--empty.avatar-s
+                                        div.video__comment-avatar__empty.avatar-s
                                             i.fas.fa-user
                                     else
                                         if isFlyIo

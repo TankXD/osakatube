@@ -13,13 +13,21 @@ export const home = async (req, res) => {
 export const watchVideos = async (req, res) => {
   const { id } = req.params;
   //const id = req.params.id와 같은방법. 하지만 ES6문법으로 쓰면 위에 방식이 된다.
-  const video = await Video.findById(id).populate("owner").populate("comments");
+  const video = await Video.findById(id)
+    .populate("owner")
+    .populate("comments")
+    .populate("owner");
   console.log(video);
   if (!video) {
     // (video === null)로 입력하는 것과 같다.
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }
-  return res.render("watch", { pageTitle: video.title, video });
+  let comments = [];
+  video.comments.forEach((comment) => {
+    comments.push(comment);
+  });
+  console.log("123 " + video.owner + " 123");
+  return res.render("watch", { pageTitle: video.title, video, comments });
 };
 
 export const getEdit = async (req, res) => {
@@ -172,8 +180,14 @@ export const createComment = async (req, res) => {
     owner: user._id,
     video: id,
   });
+
   video.comments.push(comment._id);
   video.save();
+
+  const userSave = await User.findById(user);
+  userSave.comments.push(comment._id);
+  userSave.save();
+
   // console.log(video.owner);
   const commentInfo = await Comment.findById(comment._id).populate("owner");
   const commentInfoJSON = JSON.stringify(commentInfo);
@@ -185,9 +199,12 @@ export const deleteComment = async (req, res) => {
   const {
     params: { id },
     body: { commentId },
+    session: { user },
   } = req;
   const comment = await Comment.findById(commentId);
   const video = await Video.findById(id);
+  const commentOwner = await User.findById(user);
+
   if (!comment) {
     return res.status(404).render("404", { pageTitle: "Comment not found." });
   }
@@ -196,6 +213,9 @@ export const deleteComment = async (req, res) => {
     return res.status(403).redirect("/");
   }
   await Comment.findByIdAndDelete(commentId);
+
+  commentOwner.comments.splice(commentOwner.comments.indexOf(commentId), 1);
+  commentOwner.save();
   video.comments.splice(video.comments.indexOf(commentId), 1);
   video.save();
   return res.sendStatus(201);

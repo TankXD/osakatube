@@ -24,5 +24,6 @@ html(lang="ko")
         include partials/footer.pug
     block script 
        script(src="/static/js/main.js")
-       script(src="/static/js/header.js")
+       if loggedIn
+            script(src="/static/js/header.js")
     //-    script(src="https://kit.fontawesome.com/84cbe2bb98.js", crossorigin="anonymous")
