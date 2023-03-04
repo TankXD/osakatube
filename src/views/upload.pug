@@ -5,7 +5,8 @@ block content
     //-     video#preview 
     //-     button#startBtn Start Recording
     if errorMessage
-        h4 errorMessage
+        div.error__message
+            h4 errorMessage
 
     form(action="" method="POST",enctype="multipart/form-data")
         label(for="video") Video File

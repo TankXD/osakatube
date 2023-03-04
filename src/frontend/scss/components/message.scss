@@ -1,0 +1,56 @@
+// flass message
+@keyframes goAway {
+  from {
+    transform: none;
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+}
+
+.message {
+  z-index: 1111;
+  position: absolute;
+  top: 15px;
+  left: 0px;
+  right: 0px;
+  margin: 0 auto;
+  text-align: center;
+  max-width: 200px;
+  padding: 10px 20px;
+  border-radius: 1000px;
+  background-color: #ff478b;
+  animation: goAway 0.5s ease-in-out forwards;
+  animation-delay: 2s;
+  color: $white;
+}
+
+.empty__message {
+}
+
+.error__message {
+  display: flex;
+  align-items: center;
+  z-index: 1111;
+  justify-content: center;
+  width: 100vw;
+  height: 10vh;
+  margin-bottom: 32px;
+  position: absolute;
+  top: 10%;
+  animation: goAway 0.5s ease-in-out forwards;
+  animation-delay: 2s;
+  h4,
+  span {
+    display: inline-block;
+    box-shadow: 1px 2px 2px #ccc;
+    width: 30vw;
+    font-size: 0.8rem;
+    padding: 1rem;
+    border-radius: 1000px;
+    background-color: #ff478b;
+    color: $white;
+  }
+}
