@@ -7,7 +7,8 @@ block content
     if errorMessage
         div.error__message
             h4 errorMessage
-
+    div.page__title
+        h1 #{pageTitle}
     form(action="" method="POST",enctype="multipart/form-data")
         label(for="video") Video File
         input(type="file",required,accept="video/*",name="video",id="video") 

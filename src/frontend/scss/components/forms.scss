@@ -1,3 +1,15 @@
+.page__title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 3vh;
+  h1 {
+    font-size: 2rem;
+    font-weight: $bold;
+  }
+}
+
 form:not(.video__comments-form) {
   margin: 0 auto;
 }
@@ -7,7 +19,7 @@ form:not(.video__comments-form, .search__form) {
   // margin: 0 auto;
 }
 form {
-  &:not(.search__form, .video__comments-form) {
+  &:not(.video__comments-form, .search__form) {
     padding: 30px;
     // background-color: rgba($color: $light-gray, $alpha: 0.7);
     background-color: $light-gray;
@@ -26,7 +38,6 @@ input:not([type="range"]) {
   border: 1px solid rgba(255, 255, 255, 0.2);
   background-color: $white;
   margin-bottom: 5px;
-  font-size: 16px;
   color: $bg;
   width: 90%;
   &::placeholder {
@@ -44,4 +55,39 @@ input[type="submit"],
   text-align: center;
   cursor: pointer;
   display: block;
+}
+input[type="submit"]:hover {
+  background-color: $light-red;
+  color: $white;
+}
+
+@media screen and (max-width: 480px), (max-device-width: 480px) {
+  .page__title {
+    h1 {
+      font-size: 3rem;
+    }
+    &:not(.page__title-edit) {
+      margin-top: 6vh;
+    }
+  }
+  form:not(.video__comments-form, .search__form) {
+    padding: 3rem;
+    width: 90%;
+    font-size: 2.5rem;
+    border-radius: 20px;
+    label {
+      font-size: 2rem;
+    }
+  }
+  form:not(.video__comments-form, .search__form, .edit-profile__form) {
+    // margin-top: 10vh;
+  }
+
+  input:not([type="range"]) {
+    margin-top: 0.3rem;
+    border-radius: 10px;
+  }
+  .auth-switch {
+    font-size: 1.8rem;
+  }
 }

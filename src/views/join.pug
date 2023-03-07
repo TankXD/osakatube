@@ -5,6 +5,8 @@ block content
     if errorMessage 
         div.error__message
             span #{errorMessage}
+    div.page__title
+        h1 #{pageTitle}
     form(action="", method="POST")
         input(placeholder="Name",name="name", type="text", required)
         input(placeholder="Email",name="email", type="email", required)

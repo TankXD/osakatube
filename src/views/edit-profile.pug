@@ -6,6 +6,8 @@ block content
         img.avatar.edit-profile__avatar(src=loggedInUser.avatarUrl,crossorigin, width="100",height="100")
     else
         img.avatar.edit-profile__avatar(src="/" + loggedInUser.avatarUrl, width="100",height="100")
+    div.page__title.page__title-edit
+        h1 #{pageTitle}
     form(method="POST",enctype="multipart/form-data").edit-profile__form
         if errorMessage    
             span.error__message #{errorMessage}

@@ -1,6 +1,12 @@
 footer {
   text-align: center;
-  font-size: 12px;
+  font-size: 0.8rem;
   opacity: 0.8;
   margin-top: 50px;
+}
+@media screen and (max-width: 480px), (max-device-width: 480px) {
+  footer {
+    font-size: 1.5rem;
+    opacity: 0.95;
+  }
 }
