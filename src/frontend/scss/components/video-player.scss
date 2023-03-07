@@ -33,6 +33,10 @@
     &.showing {
       opacity: 1;
     }
+    .videoControls__timeline {
+      overflow: hidden;
+      height: 10px;
+    }
     .videoControls__btn {
       display: flex;
       flex-direction: row;
@@ -56,6 +60,8 @@
         }
         input {
           margin: 0px 20px 0px 8px;
+          height: 10px;
+          overflow: hidden;
         }
       }
       #fullscreen {
@@ -71,12 +77,14 @@
     }
     .videoControls {
       padding: 10px 16px;
+      .videoControls__timeline {
+      }
       .videoControls__play {
         .videoControls__playBtn {
-          font-size: 1.4rem;
+          font-size: 1.6rem;
         }
         .videoControls__time span {
-          font-size: 1.3rem;
+          font-size: 1.4rem;
         }
       }
       .videoControls__volume {
@@ -84,7 +92,7 @@
     }
     #mute,
     #fullScreen {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
     }
   }
 }

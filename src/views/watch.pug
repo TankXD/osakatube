@@ -65,7 +65,7 @@ block content
             div.video__comments-add__container
                 div.video__comments-user
                     if !loggedInUser.avatarUrl
-                        div.header__avatar--empty.avatar-s
+                        div.video__comment-avatar__empty.avatar-s
                             i.fas.fa-user
                     else
                         if isFlyIo
@@ -93,12 +93,12 @@ block content
                                             img.video__comment-avatar(src="/" + comment.ownerAvatar)
                             div.video__comment-added__info
                                 div.video-comment-added__info-main
-                                    h4 #{comment.ownerName} 
-                                    span #{new Date(comment.createdAt).toLocaleDateString("canada")}
-                                span #{comment.text}
+                                    h4.comment__owner #{comment.ownerName} 
+                                    span.comment__date #{new Date(comment.createdAt).toLocaleDateString("canada")}
+                                span.comment__text #{comment.text}
                         if String(loggedInUser._id) === String(comment.owner._id)
                             button.video__comment-deleteBtn
-                                span="❌"
+                                i.fa-solid.fa-trash-can
     block javascript 
          script(src="/static/js/videoPlayer.js")
          script(src="/static/js/likeVideo.js")

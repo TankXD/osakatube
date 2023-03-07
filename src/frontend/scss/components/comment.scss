@@ -72,9 +72,33 @@
   }
   .video__comment-added {
     display: flex;
+    .video__comment-added__info {
+      .comment__owner {
+        font-size: 13px;
+        font-weight: $bold;
+      }
+      .comment__date {
+        font-size: 12px;
+        color: #838383;
+      }
+      .comment__text {
+        font-size: 16px;
+      }
+    }
   }
   .video__comment-avatar__empty {
     margin: 0 15px;
+  }
+  .video__comment-deleteBtn {
+    font-size: 1.3rem;
+    border: none;
+    background: none;
+    opacity: 0.5;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.1);
+      opacity: 1;
+    }
   }
 }
 
@@ -96,3 +120,86 @@
 //     border-radius: 999px;
 //   }
 // }
+
+@media screen and (max-device-width: 480px) {
+  .video__comments-section {
+    .video__comment-avatar {
+      width: 4.5rem;
+      height: 4.5rem;
+    }
+    .video__comments-add__container {
+      .video__comment-avatar__empty {
+        width: 4.5rem;
+        height: 4.5rem;
+        font-size: 2rem;
+      }
+      .video__comments-form {
+        textarea {
+          padding: 20px 0px 30px 10px;
+
+          width: 90%;
+
+          font-size: 2.3rem;
+          overflow: hidden;
+          &::placeholder {
+            font-size: 2.3rem;
+          }
+          &:focus,
+          &:not(:placeholder-shown) {
+            height: 150px;
+            border: 1px solid $gray;
+            font-size: 3rem;
+          }
+          &:focus + button {
+            font-size: 2rem;
+          }
+          &:not(:placeholder-shown) + button {
+            font-size: 2rem;
+          }
+        }
+        button {
+          background-color: $gray;
+          padding: 15px 25px;
+          font-weight: $bold;
+        }
+      }
+    }
+  }
+
+  .video__comments {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .video__comment {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .video__comment-added {
+      display: flex;
+      .video__comment-added__info {
+        .comment__owner {
+          font-size: 1.5rem;
+          font-weight: $bold;
+        }
+        .comment__date {
+          font-size: 1.3rem;
+        }
+        .comment__text {
+          font-size: 1.8rem;
+        }
+      }
+    }
+    .video__comment-avatar__empty {
+      width: 4.5rem;
+      height: 4.5rem;
+      font-size: 2rem;
+    }
+    .video__comment-deleteBtn {
+      font-size: 1.8rem;
+    }
+  }
+}
