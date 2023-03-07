@@ -1,23 +1,31 @@
 mixin video(video)
 
-    a(href=`/videos/${video.id}`).video-mixin
-        if isFlyIo
-            img.video-mixin__thumb(src=video.thumbUrl,crossorigin,style=`background-size:cover;background-position:center;`) 
-        else
-            div.video-mixin__thumb(style=`background-image:url(${video.thumbUrl});background-size:cover;background-position:center;`) 
-        div.video-mixin__data   
-            span.video-mixin__title=video.title
-            div.video-mixin__meta
-                span #{video.owner.username} ◽ 
-                span #{video.meta.views} views   
-    //
-        p #{video.description}
-        ul 
-            each hashtags in video.hashtags
-                li=hashtags 
-        small #{video.createdAt}      
-        hr     
+    div.video-mixin
+        a(href=`/videos/${video.id}`).video-mixin__section
+            if isFlyIo
+                img.video-mixin__thumb(src=video.thumbUrl,crossorigin,style=`background-size:cover;background-position:center;`) 
+            else
+                div.video-mixin__thumb(style=`background-image:url(${video.thumbUrl});background-size:cover;background-position:center;`) 
+        div.video-mixin__data
+            a(href=`/users/${video.owner._id}`)
+                if isFlyIo
+                    img.video__mixin-avatar(src=video.owner.avatarUrl,crossorigin)
+                else 
+                    img.video__mixin-avatar(src="/" + video.owner.avatarUrl) 
+            div.video-mixin__data-section
+                a(href=`/videos/${video.id}`)
+                    span.video-mixin__title=video.title
+                    div.video-mixin__meta
+                        p #{video.owner.username}  
+                        span #{video.meta.views} views • #{new Date(video.createdAt).toLocaleDateString("ja-JP")}
+    
+        //- p #{video.description}
+        //- ul 
+        //-     each hashtags in video.hashtags
+        //-         li=hashtags 
+        //- small #{video.createdAt}      
+        //- hr     
 
-        #{video.rating} / 5
-        #{video.comments} comments
+        //- #{video.rating} / 5
+        //- #{video.comments} comments
             

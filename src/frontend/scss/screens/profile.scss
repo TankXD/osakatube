@@ -5,12 +5,21 @@
   flex-direction: column;
 
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 3rem;
   img {
     margin-bottom: 10px;
   }
   h3 {
     font-size: 18px;
     margin-top: 11px;
+  }
+}
+
+@media screen and (max-width: 480px), (max-device-width: 480px) {
+  .profile__data {
+    margin-top: 3vh;
+    transform: scale(1.5);
+    margin-bottom: 5rem;
+    // .avatar-big{}
   }
 }

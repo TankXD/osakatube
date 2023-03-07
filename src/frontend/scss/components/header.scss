@@ -19,9 +19,7 @@ header {
   .flex3 {
     flex: 1 1 20em;
   }
-  .flex2 {
-    flex: 1 1 70vw;
-  }
+
   .header__logo {
     .header__icon {
       display: flex;
@@ -153,7 +151,7 @@ header {
   }
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 481px) {
   header {
     .flex1 {
       img {
@@ -161,18 +159,44 @@ header {
         height: 2.3rem;
       }
     }
-    .flex2 {
-      .search__form {
-        width: 80%;
-      }
-    }
-    .flex3 {
-      .logout__hamburger {
-        display: none;
-      }
-    }
+    // .flex2 {
+    //   .search__form {
+    //     width: 80%;
+    //   }
+    // }
   }
   .header__icon {
+  }
+}
+
+@media screen and (min-width: 480px) and (max-width: 650px) {
+  .header__icon {
+    .osakatube__text {
+      display: none;
+    }
+  }
+  .flex2 {
+    flex: 1 1 150vw;
+    .search__form {
+      width: 100%;
+    }
+  }
+  .header__btn {
+    display: none;
+  }
+  .log__hamburger {
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  .flex2 {
+    flex: 1 1 70vw;
+  }
+  .flex3 {
+    .log__hamburger {
+      display: none;
+    }
   }
 }
 
@@ -214,7 +238,7 @@ header {
       .header__btn {
         display: none;
       }
-      .logout__hamburger {
+      .log__hamburger {
         display: flex;
       }
     }
