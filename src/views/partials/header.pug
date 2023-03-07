@@ -4,7 +4,8 @@ header
         a(href="/").header__icon
             //- i.fab.fa-youtube 
             img(src="/image/takoyaki2.png")
-            span OsakaTube
+            span.osakatube__text OsakaTube
+            
     //- res.locals 같은 경우 전역변수이기에 pug와 express가 공유하고있고
     //- 다른 명령어 없이 res.locals에 있는 데이터들은 간단하게 쓸 수 있다.
     //- 자바스크립트파일에서 res.locals안에 res.locals.sexy라는 오브젝트를 생성했다면
@@ -26,6 +27,7 @@ header
                     div.header__hamburger__menu-list.hamburger__hidden
                         a(href="/videos/upload") Upload video
                         a(href="/users/edit") Edit Profile
+                        a(href=`/users/${loggedInUser._id}`) Profile
                         a(href="/users/logout") Logout
                 li.header__profile
                     a(href=`/users/${loggedInUser._id}`)
@@ -40,6 +42,12 @@ header
                             
             else    
                 li  
-                    a(href="/login") Login                        
+                    a(href="/login").header__btn Login                        
                 li  
                     a(href="/join").header__btn Join
+                li.header__hamburger__menu.logout__hamburger
+                    button.header__hamburger__menu-btn
+                        i.fas.fa-bars
+                    div.header__hamburger__menu-list.hamburger__hidden
+                        a(href="/login") Login
+                        a(href="/join") Join
