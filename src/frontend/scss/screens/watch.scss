@@ -96,3 +96,97 @@
   border-radius: 15px;
   margin-bottom: 16px;
 }
+
+@media screen and (max-device-width: 480px) {
+  .video__data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $light-gray;
+    padding: 15px 0 10px 0;
+    .video__data-info {
+      display: flex;
+      flex-direction: column;
+      .video__data-hashtag {
+        font-size: 1rem;
+        color: #065fd4;
+      }
+      .video__data-title {
+        font-size: $font-big;
+        margin: 6px 0px 6px 0;
+        font-weight: $bold;
+      }
+      .video__data-meta {
+        font-size: $font-semi-small;
+      }
+    }
+    .video__data-like {
+      .video__data-like__btn {
+        border: none;
+        cursor: pointer;
+        padding: 10px 25px;
+        background-color: $super-light-gray;
+        border-radius: 100px;
+        font-size: $font-medium;
+        margin-right: 45px;
+        box-shadow: 1px 2px 2px #ccc;
+
+        &:not(.liked):hover {
+          background-color: $light-gray;
+        }
+        span {
+          display: inline-block;
+          transform: scale(1);
+        }
+      }
+      .liked {
+        background-color: #eae1e1;
+        &:hover {
+          background-color: #d8c0c0;
+        }
+      }
+      .liked span {
+        animation: like-button-animation 0.5s ease-in-out;
+        filter: opacity(0.7) drop-shadow(0 0 0 red);
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  @keyframes like-button-animation {
+    0% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.3);
+    }
+    50% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+
+  .video__owner-data {
+    display: flex;
+    margin: 12px 0 12px 0px;
+    .video__owner-data__avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    .video__owner-data__info {
+      padding: 16px;
+      .video__owner-data__info-name {
+        font-size: $font-big;
+        font-weight: $semi-bold;
+      }
+      .video__owner-data__info-sub {
+        font-size: $font-small;
+        opacity: 0.8;
+      }
+    }
+  }
+}

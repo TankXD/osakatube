@@ -5,41 +5,86 @@
     width: 100%;
   }
   .videoControls {
-    background-color: rgba(0, 0, 0, 0.661);
-    border-radius: 10px;
+    // background-color: rgba(0, 0, 0, 0.661);
+    // border-radius: 10px;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 0, 0, 0),
+      rgb(62 62 62)
+    );
     position: absolute;
     left: 0px;
     right: 0px;
-    width: 95%;
-    bottom: 10px;
-    display: grid;
-    grid-template-columns: 0.9fr 4fr 1fr auto;
-    gap: 10px;
+    width: 100%;
+    bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    // display: grid;
+    // grid-template-columns: 0.9fr 4fr 1fr auto;
+    // gap: 10px;
     margin: 0 auto;
     padding: 10px;
     box-sizing: border-box;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
-    align-items: center;
-    justify-content: space-between;
+    // align-items: center;
+    // justify-content: space-between;
+    color: $white;
     &.showing {
       opacity: 1;
     }
-    .videoControls__play {
+    .videoControls__btn {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      .videoControls__playBtn {
-        margin: 0px 15px 0px 0px;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      padding: 10px;
+      .videoControls__play {
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+        .videoControls__playBtn {
+          margin: 0px 15px 0px 0px;
+        }
+      }
+      .videoControls__volume {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        span {
+          margin-left: 10px;
+        }
+        input {
+          margin: 0px 20px 0px 8px;
+        }
+      }
+      #fullscreen {
+        font-size: 1.2rem;
       }
     }
-    .videoControls__volume {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      span {
-        margin-left: 10px;
+  }
+}
+
+@media screen and (max-device-width: 480px) {
+  #videoContainer {
+    video {
+    }
+    .videoControls {
+      padding: 10px 16px;
+      .videoControls__play {
+        .videoControls__playBtn {
+          font-size: 1.4rem;
+        }
+        .videoControls__time span {
+          font-size: 1.3rem;
+        }
       }
+      .videoControls__volume {
+      }
+    }
+    #mute,
+    #fullScreen {
+      font-size: 1.5rem;
     }
   }
 }

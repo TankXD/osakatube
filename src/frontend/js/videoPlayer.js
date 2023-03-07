@@ -53,11 +53,13 @@ const formatTime = (seconds) => {
 };
 
 const handleLoadedMetadata = () => {
+  // console.log(video.duration);
   totalTime.innerText = formatTime(Math.floor(video.duration));
   timeline.max = Math.floor(video.duration);
 };
 
 const handleTimeUpdate = (event) => {
+  // console.log(video.currentTime);
   currentTime.innerText = formatTime(Math.floor(video.currentTime));
   timeline.value = Math.floor(video.currentTime);
 };
@@ -91,6 +93,7 @@ const handleFullscreen = () => {
 };
 
 const hideControls = () => videoControls.classList.remove("showing");
+// 잠시 css체크용으로 블록처리, 사용할 때는 다시 풀자
 
 const handleMouseMove = () => {
   if (controlsTimeoutId) {
