@@ -202,7 +202,7 @@ header {
 
 @media screen and (max-width: 480px), (max-device-width: 480px) {
   header {
-    margin-top: 1.3rem;
+    padding: 4rem 2.8rem 3rem 2.8rem;
     .flex1 {
       img {
         width: 3.2rem;
@@ -235,6 +235,7 @@ header {
           right: 2rem;
         }
       }
+      .header__btn-list,
       .header__btn {
         display: none;
       }
