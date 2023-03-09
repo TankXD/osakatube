@@ -215,13 +215,11 @@ header {
         width: 100%;
 
         input {
-          font-size: 1.5rem;
           padding: 1.5rem 1.5rem;
         }
         button {
           top: 1.6rem;
           right: 2rem;
-          font-size: 1.5rem;
         }
       }
     }
@@ -252,6 +250,18 @@ header {
   .header__profile {
     a {
       display: none;
+    }
+  }
+}
+@media screen and (max-device-width: 480px) {
+  .flex2 {
+    .search__form {
+      input {
+        font-size: 1.5rem;
+      }
+      button {
+        font-size: 1.5rem;
+      }
     }
   }
 }
