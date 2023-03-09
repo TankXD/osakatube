@@ -36,12 +36,12 @@
   align-items: center;
   z-index: 1111;
   justify-content: center;
-  width: 100vw;
+  width: 90vw;
   height: 10vh;
   margin-bottom: 32px;
   position: absolute;
   top: 10%;
-  animation: goAway 0.5s ease-in-out forwards;
+  // animation: goAway 0.5s ease-in-out forwards;
   animation-delay: 2s;
   h4,
   span {
@@ -53,5 +53,20 @@
     border-radius: 1000px;
     background-color: #ff478b;
     color: $white;
+  }
+}
+
+@media screen and (max-device-width: 480px) {
+  .message {
+    font-size: 1.8rem;
+  }
+  .error__message {
+    top: 8%;
+    h4,
+    span {
+      padding: 1.2rem;
+      font-size: 2rem;
+      width: 45vw;
+    }
   }
 }
