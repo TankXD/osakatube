@@ -40,12 +40,15 @@ const addComment = (comment) => {
   const commentInfoMain = document.createElement("div");
   commentInfoMain.className = "video-comment-added__info-main";
   const commentUsername = document.createElement("h4");
+  commentUsername.className = "comment__owner";
   commentUsername.innerText = `${comment.owner.username} `;
   const commentDate = document.createElement("span");
+  commentDate.className = "comment__date";
   commentDate.innerText = new Date(comment.createdAt).toLocaleDateString(
     "canada"
   );
   const commentText = document.createElement("span");
+  commentText.className = "comment__text";
   commentText.innerText = `${comment.text}`;
 
   const deleteBtn = document.createElement("button");

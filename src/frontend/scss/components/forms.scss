@@ -20,6 +20,9 @@ form:not(.video__comments-form, .search__form) {
 }
 form {
   &:not(.video__comments-form, .search__form) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 30px;
     // background-color: rgba($color: $light-gray, $alpha: 0.7);
     background-color: $light-gray;
@@ -39,7 +42,8 @@ input:not([type="range"]) {
   background-color: $white;
   margin-bottom: 5px;
   color: $bg;
-  width: 80%;
+  width: 90%;
+  // width: 90%;
   &::placeholder {
     color: $light-bg;
   }
@@ -61,7 +65,35 @@ input[type="submit"]:hover {
   color: $white;
 }
 
-@media screen and (max-width: 480px), (max-device-width: 480px) {
+@media screen and (max-width: 1000px) {
+  .page__title {
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+  form:not(.video__comments-form, .search__form) {
+    padding: 2rem;
+    width: 50%;
+
+    border-radius: 20px;
+    label {
+      font-size: 1.5rem;
+    }
+  }
+  form:not(.video__comments-form, .search__form, .edit-profile__form) {
+    // margin-top: 10vh;
+  }
+
+  input:not([type="range"]) {
+    margin-top: 0.3rem;
+    border-radius: 10px;
+  }
+  .auth-switch {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 500px), (max-device-width: 500px) {
   .page__title {
     h1 {
       font-size: 3rem;
@@ -92,7 +124,7 @@ input[type="submit"]:hover {
   }
 }
 
-@media screen and (max-device-width: 480px) {
+@media screen and (max-device-width: 500px) {
   form:not(.video__comments-form, .search__form) {
     font-size: 2.5rem;
   }
