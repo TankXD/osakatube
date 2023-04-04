@@ -62,11 +62,12 @@ const handleTimeUpdate = (event) => {
   if (!isNaN(video.duration)) {
     totalTime.innerText = formatTime(Math.floor(video.duration));
     currentTime.innerText = formatTime(Math.floor(video.currentTime));
+    timeline.value = Math.floor(video.currentTime);
     timeline.max = Math.floor(video.duration);
+    console.log(video.currentTime);
   }
 
   // currentTime.innerText = formatTime(Math.floor(video.currentTime));
-  // timeline.value = Math.floor(video.currentTime);
 };
 const handleTimeLineChange = (event) => {
   const {
